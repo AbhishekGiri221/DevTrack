@@ -1,0 +1,45 @@
+.Navcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0px;
+    padding: 0px;
+
+    background-color: #ffffff;
+    position: sticky; 
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+    z-index: 1000;
+
+    padding: 20px 30px;
+}
+
+
+.Navoptions ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+.Getstartedbutton {
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    background: #7C3AED;
+    color: white;
+}
+
+.rightsection-nav-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 210px;
+}

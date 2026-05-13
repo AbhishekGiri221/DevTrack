@@ -1,0 +1,81 @@
+.Login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    margin: 4% auto;
+    padding: 2% 0 8% 0;
+    width: 35%;
+    border-radius: 25px;
+}
+
+.Loginpage-Logo {
+    height: 74px;
+    width: auto;
+    margin: 15% 0 0 0;
+}
+
+.middleText {
+    margin: 30px 0px;
+}
+
+.Welcome-heading-text {
+    margin: 20px;
+}
+
+.Welcome-subtext {
+    color: grey;
+    margin: 10px;
+}
+
+.Input-fields-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.Email-inputfield:focus{
+    outline: none;
+}
+
+.passwordinputfield-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.passwordinputfield-container input {
+    border: none;
+
+}
+
+.Password-inputfield{
+    width: 100%;
+    height: 40px;
+}
+
+.Password-inputfield:focus{
+    outline: none;
+}
+
+.Password-eyeicon{
+    cursor: pointer;
+}
+
+.field-style{
+    height: 45px;
+    width: 350px;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.Login-button{
+    background-color: var(--primary-color);
+    color: var(--primaryfont-color);
+    cursor: pointer;
+}

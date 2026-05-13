@@ -1,0 +1,14 @@
+.theme-btn {
+    /* box-shadow: 1px 1px 0px; */
+    border: 1px solid black;
+    height: 50px;
+    width: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+    background-color: white;
+}
+
+.theme-btn img{
+    height: 50%;
+}
