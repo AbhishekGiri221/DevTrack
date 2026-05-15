@@ -6,13 +6,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}/>
+        <Route path='/' element={<App />} />
         <Route path='/login' element={<Login />} />
       </Routes>
     </BrowserRouter>
-    
-  
+  </StrictMode>
+
 )
