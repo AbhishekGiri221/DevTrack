@@ -1,7 +1,7 @@
 function Settings(){
     return(
         <>
-            <H1>hii Settings</H1>
+            <h1>hii Settings</h1>
         </>
     )
 }

@@ -1,7 +1,7 @@
 function Goals(){
     return(
         <>
-            <H1>hii Goals</H1>
+            <h1>hii Goals</h1>
         </>
     )
 }

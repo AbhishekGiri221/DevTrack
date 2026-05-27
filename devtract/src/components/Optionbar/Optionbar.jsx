@@ -1,6 +1,7 @@
 import { FaHome } from "react-icons/fa";
 import Logo from "../logo/Logo";
 import './Optionbar.css';
+import ThemeButton from  '../Buttons/ThemeButton';
 
 import { HiClipboard } from "react-icons/hi";
 
@@ -34,42 +35,42 @@ function Optionbar() {
                     <ul className="option-ul-list">
 
                         <li>
-                            <NavLink to="/dashboard" className={getNavClass}>
+                            <NavLink to="/app/dashboard" className={getNavClass}>
                                 <FaHome size={22} />
                                 <span>Dashboard</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/tasks" className={getNavClass}>
+                            <NavLink to="/app/tasks" className={getNavClass}>
                                 <HiClipboard size={22} />
                                 <span>Tasks</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/goals" className={getNavClass}>
+                            <NavLink to="/app/goals" className={getNavClass}>
                                 <LuTarget size={22} />
                                 <span>Goals</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/notes" className={getNavClass}>
+                            <NavLink to="/app/notes" className={getNavClass}>
                                 <LuNotebookText size={22} />
                                 <span>Notes</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/profiles" className={getNavClass}>
+                            <NavLink to="/app/profiles" className={getNavClass}>
                                 <LuUserRound size={22} />
                                 <span>Profiles</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink to="/settings" className={getNavClass}>
+                            <NavLink to="/app/settings" className={getNavClass}>
                                 <LuSettings size={22} />
                                 <span>Settings</span>
                             </NavLink>
@@ -85,6 +86,7 @@ function Optionbar() {
                         <LuLogOut size={22} />
                         <span>Logout</span>
                     </NavLink>
+
 
                 </div>
 

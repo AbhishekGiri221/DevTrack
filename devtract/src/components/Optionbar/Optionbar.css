@@ -45,6 +45,8 @@
 }
 
 .options-style {
+    position: relative;
+
     display: flex;
     align-items: center;
 
@@ -77,15 +79,21 @@
     font-weight: 600;
 }
 
-.options-style svg {
-    transition: transform 0.25s ease;
+/* LEFT ACTIVE INDICATOR */
+.active-option::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+
+    width: 4px;
+
+    background-color: #7C3AED;
+
+    border-radius: 20px;
 }
 
-.options-style:hover svg {
-    transform: scale(1.08);
-}
 
-.logout-container {
-    width: 100%;
-    margin-top: 20px;
-}

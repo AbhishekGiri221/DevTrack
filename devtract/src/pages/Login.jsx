@@ -2,11 +2,18 @@ import './Login.css';
 import Logo from '../components/logo/Logo';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
-
+    const navigate = useNavigate();
     const [showPassword, setshowPassword] = useState(false);
 
+    function checkUser(){
+        localStorage.setItem("loggedIn", "true");
+        console.log("Hii");
+        navigate("/app/dashboard");
+    }
     return (
         <>
             <div className='Login-container'>
@@ -20,7 +27,7 @@ function Login() {
                 </div>
 
                 <div className='Input-fields-container'>
-                    <input name = 'email' className='Email-inputfield field-style' type='Email' placeholder='Email address' />
+                    <input name='email' className='Email-inputfield field-style' type='Email' placeholder='Email address' />
 
                     <div className='passwordinputfield-container field-style'>
                         <input
@@ -40,7 +47,7 @@ function Login() {
                         </span>
                     </div>
 
-                    <button className='Login-button field-style'>Login</button>
+                    <button onClick={checkUser} className='Login-button field-style'>Login</button>
 
                     <p>Don't have an account? Sign up</p>
                 </div>

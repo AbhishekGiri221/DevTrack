@@ -1,7 +1,7 @@
 function Tasks(){
     return(
         <>
-            <H1>hii Taks</H1>
+            <h1>hii Taks</h1>
         </>
     )
 }

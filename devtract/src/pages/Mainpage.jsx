@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import MainpageNavbar from '../components/Navbar/MainpageNavbar';
 import Optionbar from '../components/Optionbar/Optionbar';
 import './Mainpage.css';
 import { Outlet } from 'react-router-dom';
 
 function Mainpage() {
 
-    const [selectPage, setSelectpage] = useState("dashboard");
     return (
         <>
             <div className="Mainpage-container">
@@ -14,6 +13,7 @@ function Mainpage() {
                 </div>
 
                 <div className="right-section">
+                    <MainpageNavbar />
                     <Outlet />
                 </div>
             </div>
@@ -22,3 +22,4 @@ function Mainpage() {
 }
 
 
+export default Mainpage;
