@@ -1,0 +1,97 @@
+.wraper-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+    
+    gap: 15px;
+
+    padding: 10px 30px;
+}
+.options-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    width: 100%;
+}
+
+.heading-container{
+    margin-bottom: 10px;
+}
+
+.option-list {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+    padding: 0px 0px 10px 0px;
+
+    border-bottom: 1px solid #F1F1F1;
+
+    width: 100%;
+}
+
+.option-list:last-child{
+    border: none;
+}
+
+.option {
+    display: grid;
+    grid-template-columns: 300px auto;
+
+    align-items: center;
+
+    font-size: 14px;
+
+    gap: 55px;
+}
+
+.change-password-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 150px;
+    padding: 10px;
+
+    background-color: white;
+    
+    border: 2px solid #F3EDFF;
+
+    border-radius: 8px;
+
+    color: var(--primary-color);
+
+    font-weight: bold;
+
+    gap: 5px;
+}
+
+.Secure-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    height: 40px;
+    width: 100px;
+    padding: 10px;
+
+    border-radius: 50px;
+
+    background-color: rgb(228, 241, 228);
+
+    border: none;
+
+    color: green;
+
+    font-weight: bold;
+}

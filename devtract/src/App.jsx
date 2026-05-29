@@ -1,11 +1,10 @@
 import './App.css'
-import Navbar from '../src/components/Navbar/Navbar'
 import LandingPage from './pages/LandingPage'
-import Dashboard from './pages/Optionpages/Dashboard'
+import Dashboard from './pages/Optionpages/Dashboard/Dashboard'
 import Tasks from "../src/pages/Optionpages/Tasks"
 import Goals from "../src/pages/Optionpages/Goals"
 import Notes from "../src/pages/Optionpages/Notes"
-import Profile from "../src/pages/Optionpages/Profile"
+import Profile from "../src/pages/Optionpages/Profile/Profile"
 import Settings from "../src/pages/Optionpages/Settings"
 import Mainpage from './pages/Mainpage'
 import Login from './pages/Login'
@@ -38,7 +37,7 @@ function App() {
           <Route path='tasks' element={<Tasks />} />
           <Route path='goals' element={<Goals />} />
           <Route path='notes' element={<Notes />} />
-          <Route path='profiles' element={<Profile />} />
+          <Route path='profile' element={<Profile />} />
           <Route path='settings' element={<Settings />} />
 
         </Route>

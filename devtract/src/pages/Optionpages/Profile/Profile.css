@@ -1,8 +1,8 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    align-items: baseline;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 100%;
     width: 100%;
     margin: 0px;
@@ -18,18 +18,21 @@
     /* background-color: red; */
     width: 80vw;
     gap: 10px;
+
+    margin-top: 20px;
 }
 
-.profile-text{
+.profile-text {
     font-size: 12px;
     color: grey;
 }
+
 .bottom-container {
     display: flex;
     justify-content: start;
     align-items: start;
-    height: 83vh;
-    width: 100%;
+    min-height: 83vh;
+    width: 95%;
     /* background-color: rgb(18, 8, 8); */
     gap: 50px;
     padding: 30px 0px;
@@ -41,12 +44,13 @@
     justify-content: center;
     align-items: center;
 
-    position: relative;
+    /* position: relative; */
 
     background-color: white;
 
-    height: 65%;
-    width: 25%;
+    flex: 1;
+    height: 62%;
+    min-width: 300px;
 
     border-radius: 10px;
     gap: 5px;
@@ -59,88 +63,26 @@
     align-items: center;
     /* background-color: rgb(128, 76, 76); */
     height: 100%;
-    width: 65%;
+    /* width: 65%; */
+    flex: 3;
     border-radius: 10px;
     overflow: hidden;
-    gap: 50px;
+    gap: 30px;
 }
 
 .right-top-container {
     height: 65%;
     width: 100%;
     background-color: white;
+
+    border-radius: 10px;
 }
 
 .right-bottom-container {
-    height: 30%;
+    height: 32%;
     width: 100%;
-    background-color: aquamarine;
-}
-
-.profile-img-container {
-    position: relative;
-
-    height: 120px;
-    width: 120px;
-
-    overflow: hidden;
-
-    background-color: blue;
-    border-radius: 50%;
-
-    margin: 10px 0px;
-}
-
-.profile-image {
-    height: 120px;
-    width: 120px;
-    object-fit: contain;
-
-}
-
-.joined-Date-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 10px 10px 10px;
-}
-
-.joined-Date-container::before {
-    content: "";
-
-    position: absolute;
-
-    left: 10px;
-    top: 288px;
-    bottom: 105px;
-
-    width: 92%;
-
-    background-color: grey;
-
-    /* border-radius: 20px; */
-}
-
-.job-title {
-    font-size: 14px;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-.email-text {
-    font-size: 12px;
-    color: grey;
-    margin: 10px 0px;
-
-    /* font-weight: bold; */
-
-}
-
-.member-title {
-    color: grey;
-
-
+    background-color: white;
+    border-radius: 10px;
 }
 
 .date-container {
@@ -155,26 +97,4 @@
 
     /* font-weight: bold; */
 
-}
-
-.prfolie-upload-button{
-    position: absolute;
-    cursor: pointer;
-    
-    height: 40px;
-    width: 40px;
-
-    border: none;
-    background-color: white;
-
-    box-shadow: 1px 1px 1px grey;
-
-    top: 125px;
-    right: 90px;
-
-    border-radius: 50%;
-}
-
-.camera-icon{
-    color: var(--primary-color);
 }

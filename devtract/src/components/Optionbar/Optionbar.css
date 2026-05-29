@@ -10,6 +10,8 @@
     padding: 18px 14px;
 
     border-right: 1px solid #E5E7EB;
+
+    overflow: hidden;
 }
 
 .list-logo-container {

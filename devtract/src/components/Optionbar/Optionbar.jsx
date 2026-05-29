@@ -1,7 +1,6 @@
 import { FaHome } from "react-icons/fa";
 import Logo from "../logo/Logo";
 import './Optionbar.css';
-import ThemeButton from  '../Buttons/ThemeButton';
 
 import { HiClipboard } from "react-icons/hi";
 
@@ -63,7 +62,7 @@ function Optionbar() {
                         </li>
 
                         <li>
-                            <NavLink to="/app/profiles" className={getNavClass}>
+                            <NavLink to="/app/profile" className={getNavClass}>
                                 <LuUserRound size={22} />
                                 <span>Profiles</span>
                             </NavLink>

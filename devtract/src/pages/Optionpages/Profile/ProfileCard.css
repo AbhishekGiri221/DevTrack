@@ -1,0 +1,74 @@
+.profile-image-wrapper{
+    position: relative;
+
+    height: 120px;
+    width: 120px;
+}
+
+.profile-img-container{
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+}
+
+
+
+.profile-upload-button{
+    position: absolute;
+
+    bottom: 5px;
+    right: 0;
+
+    height: 36px;
+    width: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+
+    z-index: 10;
+}
+.profile-upload-button:hover{
+    transform: scale(1.05);
+}
+
+.camera-icon {
+    color: var(--primary-color);
+}
+
+.job-title {
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.email-text {
+    font-size: 12px;
+    color: grey;
+    margin: 10px 0px;
+
+    /* font-weight: bold; */
+
+}
+
+.joined-Date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 10px 10px 10px;
+}
+
+.member-title {
+    color: grey;
+
+
+}

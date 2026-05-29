@@ -9,12 +9,16 @@ function Mainpage() {
         <>
             <div className="Mainpage-container">
                 <div className="left-section">
-                    <Optionbar/>
+                    <Optionbar />
                 </div>
 
                 <div className="right-section">
                     <MainpageNavbar />
-                    <Outlet />
+
+                    <div className="page-content">
+                        <Outlet />
+
+                    </div>
                 </div>
             </div>
         </>
