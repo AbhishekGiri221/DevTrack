@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Task.css";
 import AddtaskForm from "./AddtaskForm";
 import AddTaskButton from "../../../components/Buttons/AddTaskButton";
 import TaskList from "./TaskList";
+import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
+
 
 function Tasks() {
 
     const [activeFilter, setActiveFilter] = useState("All")
     const [showForm, setShowForm] = useState(false);
+    const [task, setTask] = useState([]);
+
+    function addTask(newTask) {
+
+        setTask((prev) => [...prev, newTask])
+
+    }
+
     function handleAddTask() {
-        // open a form for adding a task and from there 
-        // there should be a button to add task on click of that
-        // you should be able to handle the adding of the task
         setShowForm((prev) => !prev);
     }
 
-    const filters = ["All", "Pending", "Completed"];
+    const filters = ["All", "Pending", "In Progress", "Completed"];
+
+    const icons = {
+        All: <LayoutGrid />,
+        Pending: <Clock3 />,
+        "In Progress": <Activity />,
+        Completed: <CheckCircle2 />
+    }
 
     return (
         <div className="task-wrapper-container">
@@ -34,28 +48,32 @@ function Tasks() {
                     {filters.map((filter) => (
                         <li
                             key={filter}
-                            className={activeFilter === filter ? "active-filter" : ""}
+                            className={activeFilter === filter ? "filters active-filter" : "filters"}
                             onClick={() => setActiveFilter(filter)}
                         >
+                            {icons[filter]}
                             {filter}
                         </li>
                     ))}
                 </ul>
             </div>
 
-            <div className="task-list-container">
-
-            </div>
-
             {showForm && (
                 <div className="modal-overlay">
-                    <AddtaskForm onClose={() => setShowForm(!showForm)} />
+                    <AddtaskForm addTask={addTask} onClose={() => setShowForm(!showForm)} />
 
                 </div>
             )}
 
             <div className="task-list-container">
-                <TaskList />
+                <div>
+                    <h4 className="task-head">Tasks</h4>
+
+                </div>
+
+                <div className="list-container">
+                    <TaskList task={task} />
+                </div>
             </div>
         </div>
     );

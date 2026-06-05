@@ -4,14 +4,36 @@ import { useState } from 'react';
 import AddTaskButton from '../../../components/Buttons/AddTaskButton';
 
 
-function AddtaskForm({onClose}) {
+// function TaskForm(props) {
+//   console.log(props);
+// }
+// props will be:
+// {
+//   addTask: function addTask() {} --> so for accessing addTask will we access it as props.addTask
+// }
+
+function AddtaskForm({onClose,addTask}) {
 
     const priorities = ["Low", "Medium", "high"];
-
     const [priority, setPriority] = useState("Low");
     const [dueDate, setDueDate] = useState("");
     const [description, setDescription] = useState("");
     const [title, setTitle] = useState("");
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+
+        const newTask = {
+            title,
+            description,
+            priority,
+            dueDate,
+        }
+
+        console.log("hii", newTask);
+        addTask(newTask);
+        onClose();
+    }
     return (
         <>
             <div className="task-form-cotainer">
@@ -23,7 +45,7 @@ function AddtaskForm({onClose}) {
                         onClick={onClose}
                     />
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="input-form-container">
                         <div className="title input-content-style">
                             <span>Task Title</span>
