@@ -1,7 +1,7 @@
 import './App.css'
 import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Optionpages/Dashboard/Dashboard'
-import Tasks from "../src/pages/Optionpages/Tasks"
+import Tasks from "../src/pages/Optionpages/Tasks/Task"
 import Goals from "../src/pages/Optionpages/Goals"
 import Notes from "../src/pages/Optionpages/Notes"
 import Profile from "../src/pages/Optionpages/Profile/Profile"

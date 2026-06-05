@@ -1,0 +1,160 @@
+.task-form-cotainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    position: absolute;
+
+    height: 75vh;
+    width: 500px;
+
+    background-color: white;
+
+    top: 80px;
+    left: 500px;
+
+    border-radius: 20px;
+
+    padding: 30px 30px;
+
+    font-family: 'Inter', sans-serif;
+
+    gap: 50px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.top-task-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.input-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 30px;
+
+    font-size: 20px;
+}
+
+.input-content-style {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.priority-date-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 20px;
+
+    /* background-color: red; */
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 80px;
+
+    margin-top: 20px;
+
+    /* background-color: red; */
+}
+
+.title-input-field {
+    height: 40px;
+    width: 100%;
+
+    padding: 10px;
+
+    font-family: 'Inter', sans-serif;
+
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.title-input-field:focus {
+    outline: none;
+}
+
+.description-input-field {
+    height: 100px;
+    width: 100%;
+
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.description-input-field:focus {
+    outline: none;
+}
+
+/* .priority{
+    background-color: yellow;
+    width: 100%;
+} */
+
+.priority-option-field {
+    height: 40px;
+    width: 200px;
+
+    font-size: 18px;
+    padding: 0px 10px;
+    font-family: 'Inter', sans-serif;
+
+    /* width: 50%; */
+}
+
+/* .priority-option-field:focus {
+    outline: none;
+} */
+
+/* .due-date{
+    width: 100%;
+    background-color: violet;
+} */
+
+.date-input-field {
+    height: 40px;
+    width: 207px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+
+
+}
+
+/* .date-input-field:focus {
+    outline: none;
+} */
+
+.add-task-button {
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    background: #7C3AED;
+    color: white;
+}
+
+.cancel-button {
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    color: black;
+
+    cursor: pointer;
+}

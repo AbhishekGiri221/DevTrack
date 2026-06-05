@@ -79,6 +79,10 @@
 }
 
 .right-bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     height: 32%;
     width: 100%;
     background-color: white;

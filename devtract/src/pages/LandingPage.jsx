@@ -9,7 +9,7 @@ function LandingPage() {
     return (
         <>
             <div className="landingpagecontainer">
-
+                
                 <div className='leftsection'>
                     <h1 className='titletextheading'> Track. Plan.</h1>
                     <h1 className='titletextheading purpleheadingtext'>Acheive.</h1>

@@ -1,4 +1,4 @@
-.Dashboard-container{
+.Dashboard-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -6,12 +6,12 @@
     background-color: var(--mainpage-background-color);
     height: 100vh;
 
-    gap: 50px;
+    gap: 40px;
 
     padding: 0px 30px 0px 30px;
 }
 
-.heading-container{
+.heading-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,43 +21,78 @@
     gap: 10px;
 }
 
-.dashboard-text{
-    font-size: 12px;
+.dashboard-text {
+    font-size: 18px;
     color: grey;
 }
 
-.stats-container{
+.stats-container {
     /* background-color: red; */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 200px 200px 200px 200px;
 
-    height: 35vh;
+    height: 25vh;
 
-    gap: 10px;
+    gap: 100px;
 }
 
-.task-stats{
+.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border-radius: 10px;
+
+}
+
+.stats-completion-rate {
+    font-size: 65px;
+
+    border-radius: 50%;
+}
+
+.stats-name {
+    font-size: 20px;
+
+    color: black;
+}
+
+.task-stats {
     background-color: #dae2f7;
     color: #4F6BFF;
+
+    /* box-shadow: 0px 0px 4px #4F6BFF; */
+    border: 1px solid #4F6BFF;
 }
 
-.goals-stats{
+
+
+.goals-stats {
     background-color: #daf8e9;
     color: #22C55E;
-    
+
+    border: 1px solid #22C55E;
+
 }
 
-.streak-stats{
+.streak-stats {
     background-color: #fdf0d6;
     color: #F59E0B;
+
+    border: 1px solid #F59E0B;
+
 }
 
-.productivity-stats{
+.productivity-stats {
     background-color: #e9d6fd;
     color: #7C3AED;
+
+    border: 1px solid #7C3AED;
+
 }
 
-.bottom-dashboard-container{
+.bottom-dashboard-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
 
@@ -66,10 +101,49 @@
     gap: 50px;
 }
 
-.task-container{
-    background-color: red;
+.task-container {
+    background-color: white;
+    /* box-shadow: 0px 0px 5px grey; */
+
+    border-radius: 10px;
+
 }
 
-.motivation-container{
-    background-color: #22C55E;
+.motivation-heading-container{
+    width: 100%;
+}
+
+.motivation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: white;
+
+    border-radius: 10px;
+
+    /* box-shadow: 0px 0px 5px grey; */
+
+    padding:  40px 20px;
+
+    gap: 40px;
+}
+
+.motivation-heading{
+    border-bottom: 1px solid rgb(199, 199, 199);
+
+    padding: 0px 0px 10px 0px;
+}
+
+.motivation-quote{
+    font-size: 25px;
+    color: grey;
+
+    flex-wrap: wrap;
+
+    height: 200px;
+    width: 190px;
+
+    margin-left: 50px;
+    
 }

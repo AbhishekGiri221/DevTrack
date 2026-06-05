@@ -82,8 +82,8 @@ function Optionbar() {
                 <div className="logout-container">
 
                     <NavLink to="/logout" className={getNavClass}>
-                        <LuLogOut size={22} />
-                        <span>Logout</span>
+                        <LuLogOut size={22} color="red" />
+                        <span style={{color:'red'}}>Logout</span>
                     </NavLink>
 
 
