@@ -1,4 +1,4 @@
-.add-task-button{
+.add-goals-button {
     border: none;
     height: 50px;
     width: 100px;
@@ -8,10 +8,10 @@
 
     font-size: 15px;
     cursor: pointer;
-
     transition: all 0.2s ease-in;
+
 }
 
-.add-task-button:hover{
+.add-goals-button:hover {
     font-size: 1rem;
 }

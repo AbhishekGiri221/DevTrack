@@ -67,7 +67,7 @@
     justify-content: flex-end;
     align-items: center;
 
-    gap: 80px;
+    gap: 40px;
 
     margin-top: 20px;
 
@@ -75,15 +75,16 @@
 }
 
 .title-input-field {
-    height: 40px;
+    height: 50px;
     width: 100%;
 
     padding: 10px;
 
     font-family: 'Inter', sans-serif;
+    border-radius: 10px;
 
-    border: 1px solid grey;
-    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 5px grey;
 }
 
 .title-input-field:focus {
@@ -96,36 +97,32 @@
 
     padding: 10px;
     font-family: 'Inter', sans-serif;
+
+    border-radius: 10px;
+
+    border: none;
+    box-shadow: 0px 2px 5px grey;
 }
 
 .description-input-field:focus {
     outline: none;
 }
 
-/* .priority{
-    background-color: yellow;
-    width: 100%;
-} */
 
 .priority-option-field {
     height: 40px;
     width: 200px;
 
-    font-size: 18px;
+    font-size: 13px;
     padding: 0px 10px;
     font-family: 'Inter', sans-serif;
 
-    /* width: 50%; */
+    border-radius: 10px;
+
+    border: none;
+    box-shadow: 0px 2px 5px grey;
+
 }
-
-/* .priority-option-field:focus {
-    outline: none;
-} */
-
-/* .due-date{
-    width: 100%;
-    background-color: violet;
-} */
 
 .date-input-field {
     height: 40px;
@@ -133,12 +130,13 @@
     padding: 10px;
     font-family: 'Inter', sans-serif;
 
+    border-radius: 10px;
+
+    border: none;
+    box-shadow: 0px 2px 5px grey;
+
 
 }
-
-/* .date-input-field:focus {
-    outline: none;
-} */
 
 .add-task-button {
     border: none;
@@ -147,6 +145,9 @@
     border-radius: 10px;
     background: #7C3AED;
     color: white;
+
+    border: none;
+    box-shadow: 0px 2px 5px grey;
 }
 
 .cancel-button {
@@ -157,4 +158,13 @@
     color: black;
 
     cursor: pointer;
+
+    border: none;
+    box-shadow: 0px 2px 5px grey;
+
+    transition: all 0.2s ease-in;
+}
+
+.cancel-button:hover{
+    font-size: 1rem;
 }

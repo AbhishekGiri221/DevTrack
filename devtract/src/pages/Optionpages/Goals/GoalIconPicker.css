@@ -1,0 +1,35 @@
+.icon-grid{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: (2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.icon-option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 40px;
+
+    padding: 10px;
+    transition: all 0.2s ease;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+}
+.icon-option:hover{
+    cursor: pointer;
+    background-color: #f5f3ff;
+    transform: translateY(-2px);
+}
+.icon-option.active {
+    background-color: #7c3aed;
+    color: white;
+    border-color: #7c3aed;
+
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}

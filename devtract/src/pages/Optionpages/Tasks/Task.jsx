@@ -6,11 +6,10 @@ import TaskList from "./TaskList";
 import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
 
 
-function Tasks() {
+function Tasks({ task, setTask }) {
 
     const [activeFilter, setActiveFilter] = useState("All")
     const [showForm, setShowForm] = useState(false);
-    const [task, setTask] = useState([]);
 
     function addTask(newTask) {
 

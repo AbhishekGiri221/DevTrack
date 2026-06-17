@@ -1,5 +1,6 @@
+import TaskList from '../Tasks/TaskList';
 import './Dashboard.css';
-function Dashboard() {
+function Dashboard({task}) {
     return (
         <>
             <div className="Dashboard-container">
@@ -10,7 +11,7 @@ function Dashboard() {
 
                 <div className="stats-container">
                     <div className="task-stats stats">
-                        <span className='task-number stats-completion-rate'>12</span>
+                        <span className='task-number stats-completion-rate'>{task.length}</span>
                         <span className='stats-name'>Tasks</span>
                     </div>
                     <div className="goals-stats stats">
@@ -29,7 +30,8 @@ function Dashboard() {
 
                 <div className="bottom-dashboard-container">
                     <div className="task-container">
-
+                        <h3>My Tasks</h3>
+                        <TaskList task={task}/>
                     </div>
 
                     <div className="motivation-container">

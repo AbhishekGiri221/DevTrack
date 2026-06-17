@@ -102,11 +102,19 @@
 }
 
 .task-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
     background-color: white;
-    /* box-shadow: 0px 0px 5px grey; */
 
     border-radius: 10px;
+    padding: 20px 20px;
 
+    overflow-y: scroll;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .motivation-heading-container{

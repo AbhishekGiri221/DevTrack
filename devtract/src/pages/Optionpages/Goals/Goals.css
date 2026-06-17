@@ -1,0 +1,91 @@
+.goals-wrapper-container {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding: 10px;
+    gap: 20px;
+    /* background-color: red; */
+}
+
+.goal-heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* background-color: yellow; */
+
+
+    padding: 10px;
+}
+
+.goal-left-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* background-color: salmon; */
+}
+
+.goal-right-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background-color: aquamarine; */
+
+    gap: 50px;
+
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    height: 50px;
+    width: 250px;
+
+    border: 1px solid grey;
+
+    border-radius: 10px;
+
+    gap: 10px;
+    padding: 10px;
+}
+
+.search-container input {
+    /* background-color: red; */
+
+    border: none;
+    height: 30px;
+    width: 220px;
+}
+
+.search-container input:focus {
+    outline: none;
+}
+
+.goals-dashboard-card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    padding: 20px;
+
+    /* background-color: violet; */
+}
+
+.goals-bottom-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: 20px;
+}

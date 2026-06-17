@@ -41,6 +41,7 @@ function AddtaskForm({onClose,addTask}) {
                 <div className="top-task-container">
                     <h1>Add New Task</h1>
                     <FiX 
+                        className='cancelButton'
                         size={30} 
                         onClick={onClose}
                     />
@@ -105,7 +106,7 @@ function AddtaskForm({onClose,addTask}) {
                         </div>
                         <div className="buttons">
                             {/* even if we don't give button type submit by default it is submit button */}
-                            <button className = "cancel-button" type='button'>cancel</button>
+                            <button className = "cancel-button" type='button'>Cancel</button>
                             <AddTaskButton type='submit'>Add Task</AddTaskButton>
                         </div>
                     </div>
