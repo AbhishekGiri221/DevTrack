@@ -5,8 +5,8 @@
 }
 
 .filters button {
-    height: 40px;
-    width: 90px;
+    height: 50px;
+    width: 100px;
 
     border: none;
 
@@ -17,9 +17,13 @@
 }
 
 .filters button:hover {
-    /* background-color: var(--primary-color); */
-    /* color: white; */
+    background-color: var(--primary-color);
+    color: white;
     scale: 1.1;
+}
+.nonactive{
+    background-color: white;
+    color: black;
 }
 
 .active {

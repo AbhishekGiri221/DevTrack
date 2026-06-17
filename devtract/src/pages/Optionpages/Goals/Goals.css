@@ -7,7 +7,7 @@
 
     padding: 10px;
     gap: 20px;
-    /* background-color: red; */
+    background-color: var(--mainpage-background-color);
 }
 
 .goal-heading-container {

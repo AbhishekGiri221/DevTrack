@@ -9,7 +9,7 @@ function GoalsList(params) {
             <div className="goal-list-container">
                 <div className="goal-list">
                     <div className="list-left-section">
-                        <div className="goal-list-logo"> <FaReact size={40} /></div>
+                        <div className="goal-list-logo"> <FaReact size={60} /></div>
                         <div className="goal-list-content">
                             <h2>Become react developer</h2>
                             <span>master react and build amazing projects</span>

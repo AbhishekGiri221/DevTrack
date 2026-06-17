@@ -4,14 +4,17 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 500px;
+    height: 350px;
 
     width: 100%;
     overflow-y: scroll;
 
     padding: 20px;
 
-    gap: 20px;
+    background-color: white;
+
+    border-radius: 10px;
+    gap: 30px;
     overflow-y: scroll;
 }
 
@@ -31,7 +34,7 @@
     flex-shrink: 0;
     font-size: 14px;
 
-    box-shadow: 0px 0px 4px gray;
+    box-shadow: 0px 0px 1px gray;
 
 }
 

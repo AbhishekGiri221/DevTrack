@@ -1,0 +1,18 @@
+.add-notes-button {
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    background: #7C3AED;
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+}
+
+.add-notes-button:hover {
+    font-size: 1rem;
+
+}

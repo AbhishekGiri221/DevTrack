@@ -10,7 +10,7 @@ function GoalFilter() {
                     return (
                         <button
                             key={index}
-                            className={activeFilter === filter ? "active" : ""}
+                            className={activeFilter === filter ? "active" : "nonactive"}
                             onClick={()=>setActiveFilter(filter)}
                         >
 

@@ -1,4 +1,3 @@
-import { FaSearch } from "react-icons/fa";
 import './Goals.css';
 import AddGoalsButton from "../../../components/Buttons/AddGoalsButton";
 import GoalDashboardCard from "./GoalDashboardCard";
@@ -6,6 +5,7 @@ import GoalFilter from "./GoalFilter";
 import GoalsList from "./GoalsList";
 import GoalForm from "./GoalForm";
 import { useState } from "react";
+import SearchBar from "../../../components/Buttons/SearchBar";
 
 function Goals() {
     const [showGoalForm, setShowGoalForm] = useState(false);
@@ -18,10 +18,7 @@ function Goals() {
                         <span>Track you goals and achieve more</span>
                     </div>
                     <div className="goal-right-head">
-                        <div className="search-container">
-                            <FaSearch size={15}/>
-                            <input type="text" placeholder="Search goals..." />
-                        </div>
+                            <SearchBar placeholder={"Search Goals ..."} />
                             <AddGoalsButton 
                             onClick={()=>setShowGoalForm((prev)=>!prev)}/>
                     </div>
