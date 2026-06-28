@@ -3,16 +3,43 @@ import Logo from '../components/logo/Logo';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Login() {
     const navigate = useNavigate();
+
+    const [userInfo, setUserInfo] = useState({
+                                    email : "",
+                                    password : ""
+                                    })
+
     const [showPassword, setshowPassword] = useState(false);
 
-    function checkUser(){
-        localStorage.setItem("loggedIn", "true");
-        console.log("Hii");
-        navigate("/app/dashboard");
+    function handleLoginChange(e) {
+
+        setUserInfo({
+            ...userInfo,
+            [e.target.name]: [e.target.value]
+        })
+
+        
+    }
+    async function checkUser(params) {
+        try {
+
+            console.log(`at the time of login : ${userInfo.email} and ${userInfo.password}`);
+            const response = await axios.post("http://localhost:3000/login",userInfo);
+
+            alert(response.status);
+
+            localStorage.setItem("loggedIn","true");
+
+            
+        } catch (error) {
+            alert(error.message);
+        }
+
     }
     return (
         <>
@@ -27,7 +54,13 @@ function Login() {
                 </div>
 
                 <div className='Input-fields-container'>
-                    <input name='email' className='Email-inputfield field-style' type='Email' placeholder='Email address' />
+                    <input 
+                        name='email'
+                        className='Email-inputfield field-style' 
+                        type='Email' 
+                        placeholder='Email address'
+                        onChange={(handleLoginChange)}
+                    />
 
                     <div className='passwordinputfield-container field-style'>
                         <input
@@ -35,6 +68,8 @@ function Login() {
                             type={showPassword ? "text" : "password"}
                             placeholder='Password'
                             className='Password-inputfield'
+                            onChange={(handleLoginChange)}
+
                         />
 
                         <span
@@ -49,7 +84,7 @@ function Login() {
 
                     <button onClick={checkUser} className='Login-button field-style'>Login</button>
 
-                    <p>Don't have an account? Sign up</p>
+                    <p>Don't have an account? <a href='/signup'>Sign up </a></p>
                 </div>
 
             </div>

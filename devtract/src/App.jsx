@@ -13,6 +13,7 @@ import ProtectedRoute from "../src/components/routes/ProtectedRoute"
 import { Navigate, Route, Routes } from 'react-router-dom'
 import PublicLayout from './components/layout/PublicLayout'
 import { useState } from 'react'
+import Signup from './pages/Signup'
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Route element={<PublicLayout />} >
           <Route path='/' element={<PublicRoute><LandingPage /></PublicRoute>} />
           <Route path='login' element={<PublicRoute> <Login /> </PublicRoute>} />
-
+          <Route path='signup' element={<PublicRoute> <Signup/> </PublicRoute>} />
         </Route>
         {/* Protected Layout */}
         <Route path='/app' element={
