@@ -20,24 +20,22 @@ function Login() {
 
         setUserInfo({
             ...userInfo,
-            [e.target.name]: [e.target.value]
+            [e.target.name]: e.target.value
         })
 
         
     }
-    async function checkUser(params) {
+    async function checkUser() {
         try {
-
-            console.log(`at the time of login : ${userInfo.email} and ${userInfo.password}`);
             const response = await axios.post("http://localhost:3000/login",userInfo);
+            localStorage.setItem("token",response.data.token);
 
-            alert(response.status);
-
-            localStorage.setItem("loggedIn","true");
-
+            navigate("/app/dashboard");
+            console.log("navigated");
             
         } catch (error) {
-            alert(error.message);
+
+            alert(error.response.data.message); // to access the my custom error message
         }
 
     }

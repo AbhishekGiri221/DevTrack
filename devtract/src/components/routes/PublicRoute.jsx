@@ -2,12 +2,12 @@ import { Navigate } from "react-router-dom";
 
 
 function PublicRoute({children}) {
-    console.log(children);
-    const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+
+    const token = localStorage.getItem("token")
 
     return(
         <>
-            {isLoggedIn ? <Navigate to="/app/dashboard" /> : children}
+            {token ? <Navigate to="/app/dashboard" replace/> : children}
         </>
     )
 }
