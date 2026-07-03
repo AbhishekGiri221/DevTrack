@@ -12,7 +12,7 @@ function TaskList({ task }) {
                         task.map((task) => {
                             return (
 
-                                <div className="task-lists">
+                                <div key = {task.id} className="task-lists">
                                     <div className="task-left-section">
                                         <input type="checkbox" className='input-box' />
                                         <h3>{task.title}</h3>

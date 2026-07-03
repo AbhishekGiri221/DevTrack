@@ -6,16 +6,10 @@ import TaskList from "./TaskList";
 import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
 
 
-function Tasks({ task, setTask }) {
+function Tasks({task, setTask }) {
 
     const [activeFilter, setActiveFilter] = useState("All")
     const [showForm, setShowForm] = useState(false);
-
-    function addTask(newTask) {
-
-        setTask((prev) => [...prev, newTask])
-
-    }
 
     function handleAddTask() {
         setShowForm((prev) => !prev);
@@ -59,7 +53,7 @@ function Tasks({ task, setTask }) {
 
             {showForm && (
                 <div className="modal-overlay">
-                    <AddtaskForm addTask={addTask} onClose={() => setShowForm(!showForm)} />
+                    <AddtaskForm setTask={setTask} onClose={() => setShowForm(!showForm)} />
 
                 </div>
             )}

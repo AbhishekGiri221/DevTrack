@@ -12,14 +12,39 @@ import PublicRoute from '../src/components/routes/PublicRoute'
 import ProtectedRoute from "../src/components/routes/ProtectedRoute"
 import { Navigate, Route, Routes } from 'react-router-dom'
 import PublicLayout from './components/layout/PublicLayout'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Signup from './pages/Signup'
-
+import { getToken } from './utils/auth'
+import axios from 'axios'
 
 function App() {
 
   const [task, setTask] = useState([]);
-  
+
+  useEffect(()=>{
+    getTask();
+  },[]);
+
+  async function getTask() {
+    const token = getToken();
+    console.log(token);
+    try {
+      const temporaryTask = await axios.get(
+                                            "http://localhost:3000/app/tasks",
+                                            {
+                                              headers: {
+                                                Authorization : `Bearer ${token}`
+                                              }
+                                            }
+                                        );
+
+      setTask(temporaryTask.data);
+
+    } catch (error) {
+      alert(`it is in App ${error.message}`);
+    }
+
+  }
 
 
   return (
@@ -29,7 +54,7 @@ function App() {
         <Route element={<PublicLayout />} >
           <Route path='/' element={<PublicRoute><LandingPage /></PublicRoute>} />
           <Route path='login' element={<PublicRoute> <Login /> </PublicRoute>} />
-          <Route path='signup' element={<PublicRoute> <Signup/> </PublicRoute>} />
+          <Route path='signup' element={<PublicRoute> <Signup /> </PublicRoute>} />
         </Route>
         {/* Protected Layout */}
         <Route path='/app' element={
@@ -39,8 +64,8 @@ function App() {
         }>
           <Route index element={<Navigate to='/app/dashboard' />} />
 
-          <Route path='dashboard' element={<Dashboard task={task}/>} />
-          <Route path='tasks' element={<Tasks task={task} setTask={setTask}/>} />
+          <Route path='dashboard' element={<Dashboard task={task} />} />
+          <Route path='tasks' element={<Tasks task={task} setTask={setTask} />} />
           <Route path='goals' element={<Goals />} />
           <Route path='notes' element={<Notes />} />
           <Route path='profile' element={<Profile />} />
