@@ -27,6 +27,9 @@
     height: 20px;
     width: 20px;
 }
+.input-box{
+    cursor: pointer;
+}
 
 .task-right-section{
     display: flex;
@@ -40,3 +43,53 @@
     margin: auto auto;
     color: grey;
 }
+
+
+
+.task-status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    padding: 10px 20px;
+
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.task-status.pending{
+    background-color: #FFF3CD;
+    color: #856404;
+}
+
+.task-status.inprogress{
+    background-color: #D6E4FF;
+    color: #1D4ED8;
+}
+
+.task-status.completed{
+    background-color: #D1FAE5;
+    color: #047857;
+}
+
+.edit-task-button{
+    transition: all 0.2s ease-in-out;
+
+}
+.edit-task-button:hover{
+    color: grey;
+    cursor: pointer;
+    scale: 1.1;
+}
+
+
+.delete-task-button{
+    transition: all 0.2s ease-in-out;
+}
+.delete-task-button:hover{
+    cursor: pointer;
+    color: red;
+    scale: 1.1;
+}
+

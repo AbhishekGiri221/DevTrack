@@ -31,7 +31,7 @@ function Login() {
             localStorage.setItem("token",response.data.token);
 
             navigate("/app/dashboard");
-            console.log("navigated");
+
             
         } catch (error) {
 

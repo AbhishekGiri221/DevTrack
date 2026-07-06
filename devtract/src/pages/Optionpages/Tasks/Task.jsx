@@ -6,22 +6,13 @@ import TaskList from "./TaskList";
 import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
 
 
-function Tasks({task, setTask }) {
-
-    const [activeFilter, setActiveFilter] = useState("All")
-    const [showForm, setShowForm] = useState(false);
-
-    function handleAddTask() {
-        setShowForm((prev) => !prev);
-    }
-
-    const filters = ["All", "Pending", "In Progress", "Completed"];
+function Tasks({ taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm, task, setTask, filters, setActiveFilter, activeFilter }) {
 
     const icons = {
-        All: <LayoutGrid />,
-        Pending: <Clock3 />,
-        "In Progress": <Activity />,
-        Completed: <CheckCircle2 />
+        "All": <LayoutGrid />,
+        "Pending": <Clock3 />,
+        "InProgress": <Activity />,
+        "Completed": <CheckCircle2 />
     }
 
     return (
@@ -30,7 +21,9 @@ function Tasks({task, setTask }) {
                 <h1>My Tasks</h1>
                 <AddTaskButton
                     className="addtask-button"
-                    onClick={handleAddTask}
+                    onClick={()=> setShowForm(true)}
+                    setMode = {setMode}
+                    setTaskToedit = {setTaskToedit}
                 >
                     + Add Task
                 </AddTaskButton>
@@ -53,7 +46,7 @@ function Tasks({task, setTask }) {
 
             {showForm && (
                 <div className="modal-overlay">
-                    <AddtaskForm setTask={setTask} onClose={() => setShowForm(!showForm)} />
+                    <AddtaskForm mode = {mode} setTask={setTask} onClose={() => setShowForm(!showForm) } taskToedit={taskToedit}/>
 
                 </div>
             )}
@@ -65,7 +58,7 @@ function Tasks({task, setTask }) {
                 </div>
 
                 <div className="list-container">
-                    <TaskList task={task} />
+                    <TaskList task={task} setTask={setTask} activeFilter={activeFilter} mode = {mode} setMode={setMode} setShowForm={setShowForm} setTaskToedit = {setTaskToedit}/>
                 </div>
             </div>
         </div>

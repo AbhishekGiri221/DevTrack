@@ -19,24 +19,30 @@ import axios from 'axios'
 
 function App() {
 
+  const filters = ["All", "Pending", "InProgress", "Completed"];
+  const [activeFilter, setActiveFilter] = useState("All")
+  const [showForm, setShowForm] = useState(false);
+  const [mode, setMode] = useState("create");
+  const [taskToedit, setTaskToedit] = useState();
+
   const [task, setTask] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getTask();
-  },[]);
+  }, []);
 
   async function getTask() {
     const token = getToken();
-    console.log(token);
+
     try {
       const temporaryTask = await axios.get(
-                                            "http://localhost:3000/app/tasks",
-                                            {
-                                              headers: {
-                                                Authorization : `Bearer ${token}`
-                                              }
-                                            }
-                                        );
+        "http://localhost:3000/app/tasks",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
       setTask(temporaryTask.data);
 
@@ -64,8 +70,8 @@ function App() {
         }>
           <Route index element={<Navigate to='/app/dashboard' />} />
 
-          <Route path='dashboard' element={<Dashboard task={task} />} />
-          <Route path='tasks' element={<Tasks task={task} setTask={setTask} />} />
+          <Route path='dashboard' element={<Dashboard taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
+          <Route path='tasks' element={<Tasks taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
           <Route path='goals' element={<Goals />} />
           <Route path='notes' element={<Notes />} />
           <Route path='profile' element={<Profile />} />

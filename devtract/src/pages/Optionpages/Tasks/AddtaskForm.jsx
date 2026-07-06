@@ -3,14 +3,26 @@ import './AddtaskForm.css';
 import { useState } from 'react';
 import AddTaskButton from '../../../components/Buttons/AddTaskButton';
 import axios from 'axios';
+import StatusOption from './StatusOption';
+import { useNavigate } from 'react-router-dom';
+import { AppWindowMacIcon } from 'lucide-react';
 
-function AddtaskForm({ setTask, onClose }) {
+function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
+    const navigate = useNavigate();
 
     const priorities = ["Low", "Medium", "high"];
-    const [priority, setPriority] = useState("Low");
-    const [dueDate, setDueDate] = useState("");
-    const [description, setDescription] = useState("");
-    const [title, setTitle] = useState("");
+    const status = ["pending", "inprogress", "completed"];
+
+    // const [taskStatus, setTaskStatus] = useState("inprogress");
+    const [taskStatus, setTaskStatus] = useState(taskToedit?.status || "inprogress");
+    // const [priority, setPriority] = useState("Low");
+    const [priority, setPriority] = useState(taskToedit?.priority || "Low");
+    // const [dueDate, setDueDate] = useState("");
+    const [dueDate, setDueDate] = useState(taskToedit?.duedate || "");
+    // const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(taskToedit?.description || "");
+    // const [title, setTitle] = useState("");
+    const [title, setTitle] = useState(taskToedit?.title || "");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,31 +30,53 @@ function AddtaskForm({ setTask, onClose }) {
         const newTask = {
             title,
             description,
+            taskStatus,
             priority,
             dueDate,
         }
 
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.post(
-                "http://localhost:3000/app/tasks",
-                newTask,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
+            if (mode === "create") {
+                console.log("the create mode is on and the token is : ",token);
+                console.log("the task to be aded is : ", JSON.stringify(newTask));
+                const response = await axios.post(
+                    "http://localhost:3000/app/tasks",
+                    newTask,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
 
+                        }
                     }
-                }
-            );
+                );
+                
+                console.log("post just ran");
+                setTask(prev => [...prev, response.data]);
+                alert(`task created Is ${response.data.title}`);
+                onClose();
+            }
+            if (mode === "edit") {
+                const response = await axios.patch(`http://localhost:3000/app/tasks/${taskToedit.id}`,
+                    newTask,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
 
-            setTask(prev => [...prev,response.data]);
-            alert(`task created Is ${response.data.title}`);
-            onClose();
+                );
 
+                setTask(response.data);
+
+                alert(`task updated`);
+                onClose();
+            }
         } catch (error) {
             alert(error.message);
-            localStorage.removeItem("token");
-            Navigate("/login");
+            console.log(error.message);
+            // localStorage.removeItem("token");
+            // navigate("/login");
         }
 
 
@@ -53,7 +87,7 @@ function AddtaskForm({ setTask, onClose }) {
             <div className="task-form-cotainer">
 
                 <div className="top-task-container">
-                    <h1>Add New Task</h1>
+                    <h1>{mode === "edit" ? `Edit task` : `Add New Task`}</h1>
                     <FiX
                         className='cancelButton'
                         size={30}
@@ -83,7 +117,9 @@ function AddtaskForm({ setTask, onClose }) {
                             />
                         </div>
 
+
                         <div className="priority-date-container">
+
                             <div className="priority input-content-style">
                                 <span>priority</span>
                                 <select
@@ -99,6 +135,11 @@ function AddtaskForm({ setTask, onClose }) {
                                     })}
 
                                 </select>
+                            </div>
+
+                            <div className='task-status-container input-content-style'>
+                                <span>Status</span>
+                                <StatusOption taskStatus={taskStatus} setTaskStatus={setTaskStatus} status={status} />
                             </div>
 
                             <div className="due-date input-content-style">
@@ -121,7 +162,7 @@ function AddtaskForm({ setTask, onClose }) {
                         <div className="buttons">
                             {/* even if we don't give button type submit by default it is submit button */}
                             <button onClick={onClose} className="cancel-button" type='button'>Cancel</button>
-                            <AddTaskButton type='submit'>Add Task</AddTaskButton>
+                            <button className="task-form-button" type='submit'>{mode === "edit" ? `Update Task` : `Add Task`}</button>
                         </div>
                     </div>
                 </form>

@@ -1,9 +1,12 @@
+import AddtaskForm from '../Tasks/AddtaskForm';
 import TaskList from '../Tasks/TaskList';
 import './Dashboard.css';
-function Dashboard({task}) {
+function Dashboard({taskToedit, setTaskToedit, setShowForm, showForm, task, setTask, activeFilter, setMode, mode}) {
     async function getDashboardDetails(){
         // const taskList = await 
     }
+
+    
     return (
         <>
             <div className="Dashboard-container">
@@ -34,7 +37,7 @@ function Dashboard({task}) {
                 <div className="bottom-dashboard-container">
                     <div className="task-container">
                         <h3>My Tasks</h3>
-                        <TaskList task={task}/>
+                        <TaskList task={task} setTask={setTask} activeFilter={activeFilter} setMode={setMode} setTaskToedit={setTaskToedit} setShowForm={setShowForm}/>
                     </div>
 
                     <div className="motivation-container">
@@ -48,6 +51,14 @@ function Dashboard({task}) {
                     </div>
                 </div>
 
+                {
+                   showForm && (
+                    <div className="modal-overlay">
+                    <AddtaskForm mode={mode} setTask={setTask} onClose={() => setShowForm(!showForm) } taskToedit={taskToedit}/>
+
+                    </div>
+                   )
+                }
             </div>
         </>
     )
