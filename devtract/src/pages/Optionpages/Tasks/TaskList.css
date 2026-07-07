@@ -23,6 +23,11 @@
 
     gap: 30px;
 }
+.task-left-section{
+    cursor: pointer;
+}
+
+
 .input-box{
     height: 20px;
     width: 20px;
@@ -91,5 +96,11 @@
     cursor: pointer;
     color: red;
     scale: 1.1;
+}
+
+
+.completed-task {
+    text-decoration: line-through;
+    opacity: 0.6;
 }
 

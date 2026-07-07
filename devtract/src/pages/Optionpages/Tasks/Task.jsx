@@ -4,9 +4,10 @@ import AddtaskForm from "./AddtaskForm";
 import AddTaskButton from "../../../components/Buttons/AddTaskButton";
 import TaskList from "./TaskList";
 import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
+import ViewTask from "./ViewTask";
 
 
-function Tasks({ taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm, task, setTask, filters, setActiveFilter, activeFilter }) {
+function Tasks({taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm, task, setTask, filters, setActiveFilter, activeFilter }) {
 
     const icons = {
         "All": <LayoutGrid />,
@@ -58,8 +59,15 @@ function Tasks({ taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm
                 </div>
 
                 <div className="list-container">
-                    <TaskList task={task} setTask={setTask} activeFilter={activeFilter} mode = {mode} setMode={setMode} setShowForm={setShowForm} setTaskToedit = {setTaskToedit}/>
+                    <TaskList setTaskToView ={setTaskToView} setViewTaskDetails ={setViewTaskDetails} task={task} setTask={setTask} activeFilter={activeFilter} mode = {mode} setMode={setMode} setShowForm={setShowForm} setTaskToedit = {setTaskToedit}/>
                 </div>
+
+                {
+                    viewTaskDetails && (
+                        <div className="modal-overlay">
+                            <ViewTask task={taskToView} onClose={() => setViewTaskDetails(false)} />                        </div>
+                    )
+                }
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ import Mainpage from './pages/Mainpage'
 import Login from './pages/Login'
 import PublicRoute from '../src/components/routes/PublicRoute'
 import ProtectedRoute from "../src/components/routes/ProtectedRoute"
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import PublicLayout from './components/layout/PublicLayout'
 import { useEffect, useState } from 'react'
 import Signup from './pages/Signup'
@@ -24,9 +24,10 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [mode, setMode] = useState("create");
   const [taskToedit, setTaskToedit] = useState();
-
   const [task, setTask] = useState([]);
-
+  const [viewTaskDetails, setViewTaskDetails] = useState(false);
+  const [taskToView, setTaskToView] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     getTask();
   }, []);
@@ -43,11 +44,16 @@ function App() {
           }
         }
       );
-
+      console.log(temporaryTask.data);
       setTask(temporaryTask.data);
 
     } catch (error) {
-      alert(`it is in App ${error.message}`);
+      if(error.response.status === 401){
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+      alert(`it is in App ${error.response.status}`);
+      
     }
 
   }
@@ -70,8 +76,8 @@ function App() {
         }>
           <Route index element={<Navigate to='/app/dashboard' />} />
 
-          <Route path='dashboard' element={<Dashboard taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
-          <Route path='tasks' element={<Tasks taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
+          <Route path='dashboard' element={<Dashboard taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
+          <Route path='tasks' element={<Tasks taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
           <Route path='goals' element={<Goals />} />
           <Route path='notes' element={<Notes />} />
           <Route path='profile' element={<Profile />} />

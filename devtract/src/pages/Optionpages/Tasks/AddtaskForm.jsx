@@ -6,43 +6,31 @@ import axios from 'axios';
 import StatusOption from './StatusOption';
 import { useNavigate } from 'react-router-dom';
 import { AppWindowMacIcon } from 'lucide-react';
+import { getToken } from '../../../utils/auth';
 
 function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
     const navigate = useNavigate();
 
     const priorities = ["Low", "Medium", "high"];
     const status = ["pending", "inprogress", "completed"];
-
-    // const [taskStatus, setTaskStatus] = useState("inprogress");
-    const [taskStatus, setTaskStatus] = useState(taskToedit?.status || "inprogress");
-    // const [priority, setPriority] = useState("Low");
-    const [priority, setPriority] = useState(taskToedit?.priority || "Low");
-    // const [dueDate, setDueDate] = useState("");
-    const [dueDate, setDueDate] = useState(taskToedit?.duedate || "");
-    // const [description, setDescription] = useState("");
-    const [description, setDescription] = useState(taskToedit?.description || "");
-    // const [title, setTitle] = useState("");
-    const [title, setTitle] = useState(taskToedit?.title || "");
+    
+    const [formData, setFormData] = useState({
+        title: taskToedit?.title || "",
+        description: taskToedit?.description || "",
+        priority: taskToedit?.priority || "Low",
+        status: taskToedit?.status || "inprogress",
+        dueDate: taskToedit?.duedate || ""
+    })
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const newTask = {
-            title,
-            description,
-            taskStatus,
-            priority,
-            dueDate,
-        }
+        e.preventDefault(); 
 
         try {
-            const token = localStorage.getItem("token");
+            const token = getToken();
             if (mode === "create") {
-                console.log("the create mode is on and the token is : ",token);
-                console.log("the task to be aded is : ", JSON.stringify(newTask));
                 const response = await axios.post(
                     "http://localhost:3000/app/tasks",
-                    newTask,
+                    formData,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -50,7 +38,7 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
                         }
                     }
                 );
-                
+
                 console.log("post just ran");
                 setTask(prev => [...prev, response.data]);
                 alert(`task created Is ${response.data.title}`);
@@ -58,7 +46,7 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
             }
             if (mode === "edit") {
                 const response = await axios.patch(`http://localhost:3000/app/tasks/${taskToedit.id}`,
-                    newTask,
+                    formData,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -73,15 +61,21 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
                 onClose();
             }
         } catch (error) {
+            if (error.response?.status === 401) {
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+
             alert(error.message);
-            console.log(error.message);
-            // localStorage.removeItem("token");
-            // navigate("/login");
         }
 
-
-
     }
+
+    function handleChange(e){
+        const {name,value} = e.target;
+        setFormData((prev)=>({...prev,[name]:value}));
+    }
+
     return (
         <>
             <div className="task-form-cotainer">
@@ -99,21 +93,23 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
                         <div className="title input-content-style">
                             <span>Task Title</span>
                             <input
+                                name='title'
                                 placeholder='Enter task title'
                                 className='title-input-field'
                                 type='text'
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
+                                value={formData.title}
+                                onChange={handleChange}
                             />
                         </div>
 
                         <div className="description input-content-style">
                             <span>Description</span>
                             <textarea
+                                name='description'
                                 placeholder='Enter task description | optional'
                                 className='description-input-field'
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                value={formData.description}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -123,10 +119,11 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
                             <div className="priority input-content-style">
                                 <span>priority</span>
                                 <select
+                                    name='priority'
                                     className='priority-option-field'
-                                    value={priority}
-                                    onChange={(e) => setPriority(e.target.value)}
-                                    name="priority" id="priority"
+                                    value={formData.priority}
+                                    onChange={handleChange}
+                                    id="priority"
                                 >
                                     {priorities.map((items) => {
                                         return (
@@ -139,18 +136,25 @@ function AddtaskForm({ mode, setTask, onClose, taskToedit }) {
 
                             <div className='task-status-container input-content-style'>
                                 <span>Status</span>
-                                <StatusOption taskStatus={taskStatus} setTaskStatus={setTaskStatus} status={status} />
+                                <StatusOption 
+                                    taskStatus={formData.status} 
+                                    setTaskStatus={(value)=>{
+                                                    setFormData((prev)=>({...prev, status:value}))
+                                                }} 
+                                    status={status} 
+                                />
                             </div>
 
                             <div className="due-date input-content-style">
                                 <span>Due Date</span>
                                 <input
+                                    name='dueDate'
                                     placeholder='Select Date'
                                     className='date-input-field'
                                     type="date"
-                                    value={dueDate}
+                                    value={formData.dueDate}
                                     min={new Date().toISOString().split("T")[0]}
-                                    onChange={(e) => setDueDate(e.target.value)}
+                                    onChange={handleChange}
                                     onFocus={(e) => e.target.type = "date"}
 
                                     // if no value is selecte only then do type = "text"

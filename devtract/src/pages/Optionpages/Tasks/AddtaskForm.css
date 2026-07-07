@@ -173,12 +173,16 @@
 
 }
 
-
-
 .task-form-button:hover {
-    cursor: pointer;
-    font-size: 1rem;
+
+    background: #6D28D9;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(124, 58, 237, .25);
 }
+
+
 
 .cancel-button {
     border: none;
@@ -196,5 +200,8 @@
 }
 
 .cancel-button:hover {
-    font-size: 1rem;
+
+    background: #e7e7e7;
+
+    transform: translateY(-2px);
 }
