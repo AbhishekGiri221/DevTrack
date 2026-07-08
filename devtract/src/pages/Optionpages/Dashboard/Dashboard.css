@@ -1,159 +1,277 @@
+/* ==========================
+   Dashboard
+========================== */
+
 .Dashboard-container {
+    min-height: 100vh;
+
+    padding: 32px;
+
+    background: #f8fafc;
+
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    /* align-items: flex-start; */
-    background-color: var(--mainpage-background-color);
-    height: 100vh;
 
-    gap: 30px;
-
-    padding: 0px 30px 0px 30px;
+    gap: 32px;
 }
+
+/* ==========================
+   Heading
+========================== */
 
 .heading-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 20px;
 
-    gap: 10px;
+    gap: 8px;
+}
+
+.heading-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #111827;
 }
 
 .dashboard-text {
-    font-size: 18px;
-    color: grey;
+    font-size: 16px;
+
+    color: #6b7280;
 }
 
+/* ==========================
+   Statistics
+========================== */
+
 .stats-container {
-    /* background-color: red; */
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px;
 
-    height: 23vh;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
 
-    gap: 100px;
+    gap: 24px;
 }
 
 .stats {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 28px;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
 
-    border-radius: 10px;
+    gap: 14px;
 
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.25s ease;
+}
+
+.stats:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
 }
 
 .stats-completion-rate {
-    font-size: 65px;
+    font-size: 44px;
 
-    border-radius: 50%;
+    font-weight: 700;
+
+    line-height: 1;
 }
 
 .stats-name {
-    font-size: 20px;
+    font-size: 15px;
 
-    color: black;
+    color: #6b7280;
+
+    font-weight: 500;
 }
+
+/* ==========================
+   Card Colors
+========================== */
 
 .task-stats {
-    background-color: #dae2f7;
-    color: #4F6BFF;
-
-    /* box-shadow: 0px 0px 4px #4F6BFF; */
-    border: 1px solid #4F6BFF;
+    border-left: 6px solid #4F6BFF;
 }
 
-
+.task-stats .stats-completion-rate {
+    color: #4F6BFF;
+}
 
 .goals-stats {
-    background-color: #daf8e9;
+    border-left: 6px solid #22C55E;
+}
+
+.goals-stats .stats-completion-rate {
     color: #22C55E;
-
-    border: 1px solid #22C55E;
-
 }
 
 .streak-stats {
-    background-color: #fdf0d6;
+    border-left: 6px solid #F59E0B;
+}
+
+.streak-stats .stats-completion-rate {
     color: #F59E0B;
-
-    border: 1px solid #F59E0B;
-
 }
 
 .productivity-stats {
-    background-color: #e9d6fd;
-    color: #7C3AED;
-
-    border: 1px solid #7C3AED;
-
+    border-left: 6px solid #7C3AED;
 }
+
+.productivity-stats .stats-completion-rate {
+    color: #7C3AED;
+}
+
+/* ==========================
+   Bottom Section
+========================== */
 
 .bottom-dashboard-container {
     display: grid;
+
     grid-template-columns: 2fr 1fr;
 
-    height: 45vh;
-
-    gap: 50px;
-
-    margin-top: 20px;
+    gap: 24px;
 }
+
+/* ==========================
+   Task Card
+========================== */
 
 .task-container {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    box-shadow: 0 10px 28px rgba(0,0,0,.06);
+
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
 
-    background-color: white;
+    gap: 18px;
 
-    border-radius: 10px;
-    padding: 20px 20px;
+    min-height: 400px;
+    max-height: 400px;
 
-    overflow-y: scroll;
-    gap: 10px;
-    flex-shrink: 0;
+    overflow-y: auto;
 }
 
-.motivation-heading-container{
+.task-container h3 {
+    font-size: 22px;
+
+    color: #111827;
+
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid #ececec;
+}
+
+/* ==========================
+   Motivation Card
+========================== */
+
+.motivation-container {
+    background: linear-gradient(135deg,#7C3AED,#8B5CF6);
+
+    color: white;
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-shadow: 0 14px 32px rgba(124,58,237,.25);
+}
+
+.motivation-heading-container {
     width: 100%;
 }
 
-.motivation-container {
+.motivation-heading {
+    font-size: 24px;
+
+    font-weight: 700;
+
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid rgba(255,255,255,.25);
+}
+
+.motivation-quote {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: white;
+    align-items: center;
 
-    border-radius: 10px;
+    flex: 1;
 
-    /* box-shadow: 0px 0px 5px grey; */
+    font-size: 24px;
 
-    padding:  40px 20px;
+    line-height: 1.7;
 
-    gap: 40px;
+    font-style: italic;
+
+    color: rgba(255,255,255,.95);
 }
 
-.motivation-heading{
-    border-bottom: 1px solid rgb(199, 199, 199);
+/* ==========================
+   Scrollbar
+========================== */
 
-    padding: 0px 0px 10px 0px;
+.task-container::-webkit-scrollbar {
+    width: 8px;
 }
 
-.motivation-quote{
-    font-size: 25px;
-    color: grey;
+.task-container::-webkit-scrollbar-thumb {
+    background: #d1d5db;
 
-    flex-wrap: wrap;
+    border-radius: 999px;
+}
 
-    height: 200px;
-    width: 190px;
+.task-container::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
 
-    margin-left: 50px;
-    
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 1100px) {
+
+    .stats-container {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .bottom-dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .Dashboard-container {
+        padding: 20px;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .heading-container h2 {
+        font-size: 26px;
+    }
+
+    .motivation-quote {
+        font-size: 20px;
+    }
 }

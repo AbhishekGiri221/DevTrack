@@ -1,34 +1,7 @@
 // GoalIconPicker.jsx
-
-import {
-    Code,
-    BookOpen,
-    Dumbbell,
-    Wallet,
-    Briefcase,
-    Heart,
-    Plane,
-    GraduationCap,
-    Trophy,
-    Target
-} from "lucide-react";
-
 import "./GoalIconPicker.css";
-
+import { icons } from "./goalIcon";
 function GoalIconPicker({ selectedIcon, setSelectedIcon }) {
-
-    const icons = [
-        { name: "Code", icon: Code },
-        { name: "BookOpen", icon: BookOpen },
-        { name: "Dumbbell", icon: Dumbbell },
-        { name: "Wallet", icon: Wallet },
-        { name: "Briefcase", icon: Briefcase },
-        { name: "Heart", icon: Heart },
-        { name: "Plane", icon: Plane },
-        { name: "GraduationCap", icon: GraduationCap },
-        { name: "Trophy", icon: Trophy },
-        { name: "Target", icon: Target }
-    ];
 
     return (
         <>
@@ -39,9 +12,11 @@ function GoalIconPicker({ selectedIcon, setSelectedIcon }) {
                         return (
                             <button
                                 type="button"
-                                value={selectedIcon}
-                                onClick={()=>setSelectedIcon(items.name)}
+                                onClick={() => setSelectedIcon(items.name)}
                                 className={selectedIcon === items.name ? "icon-option active" : "icon-option"}
+                                style={{
+                                    color: selectedIcon === items.name ? "white" : items.color
+                                }}
                             >
                                 <Icon size={20} />
                             </button>

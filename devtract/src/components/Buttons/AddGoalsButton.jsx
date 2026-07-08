@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react';
 import './AddGoalsButton.css';
 
 function AddGoalsButton({onClick}) {
@@ -8,7 +9,7 @@ function AddGoalsButton({onClick}) {
                 // type={type}
                 onClick={onClick}
             >
-                + New Goals
+                <Plus size={18}/> New Goals
             </button>
         </>
     )

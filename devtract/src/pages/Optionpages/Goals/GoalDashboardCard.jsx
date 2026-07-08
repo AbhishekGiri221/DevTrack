@@ -2,64 +2,78 @@ import { CircleCheck, Target, TrendingUp, PieChart } from 'lucide-react';
 import './GoalDashboardCard.css';
 import { BiColor } from 'react-icons/bi';
 
-function GoalDashboardCard() {
+function GoalDashboardCard({ goalList }) {
     const cardDetails = [
         {
-            name: "Total Goals",
+            title: "Total Goals",
             icon: Target,
-            count: 4,
-            subtext: "All time",
-            color: "#7C3AED"
+            stats: {
+                value: goalList?.length ?? 0,
+                subtitle: "All Time"
+            },
+            theme: {
+                color: "#7C3AED"
+            }
         },
-
         {
-            name: "Active Goals",
+            title: "Active Goals",
             icon: TrendingUp,
-            count: 4,
-            subtext: "In progress",
-            color : "green",
+            stats: {
+                value: 4,
+                subtitle: "In Progress"
+            },
+            theme: {
+                color: "#10B981"
+            }
         },
-
         {
-            name: "Completed Goals",
+            title: "Completed Goals",
             icon: CircleCheck,
-            count: 4,
-            subtext: "Completed",
-                        color: "#ae97d6ff"
-
+            stats: {
+                value: 4,
+                subtitle: "Completed"
+            },
+            theme: {
+                color: "#A78BFA"
+            }
         },
-
         {
-            name: "Overall Progress",
+            title: "Overall Progress",
             icon: PieChart,
-            count: 4,
-            subtext: "Keep it up!",
-            color: "#3a5eedff",
-
+            stats: {
+                value: "75%",
+                subtitle: "Keep it up!"
+            },
+            theme: {
+                color: "#3B82F6"
+            }
         }
-    ]
+    ];
     return (
         <>
-                {cardDetails.map((card,index)=>{
-                    const Icon = card.icon;
+            {cardDetails.map((card, index) => {
+                const Icon = card.icon;
 
-                    return(
-                        <div className="goal-cards" key={index}>
-                            <div className="icon">
-                                {/* component must start with capital letter */}
-                                <Icon size ={60} style={{color: `${card.color}`}}/>
-                            </div>
-                            <div className="text">
-                                <span>{card.name}</span>
-                                <h1>{card.count}</h1>
-                                <span>{card.subtext}</span>
-                            </div>
+                return (
+                    <div className="goal-cards" key={index}>
+                        <div
+                            className="icon"
+                            style={{ backgroundColor: `${card.theme.color}20` }}
+                        >
+                            <Icon
+                                size={34}
+                                style={{ color: card.theme.color }}
+                            />
                         </div>
-                    )
 
-                })
-                
-                }
+                        <div className="text">
+                            <span>{card.title}</span>
+                            <h1>{card.stats.value}</h1>
+                            <span>{card.stats.subtitle}</span>
+                        </div>
+                    </div>
+                );
+            })}
         </>
     )
 }

@@ -1,70 +1,191 @@
-.landingpagecontainer{
+.landingpagecontainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    /* background-color: white; */
-    height: 100%;
-    width: 100%;
 
+    min-height: calc(100vh - 80px);
 
-}
+    padding: 0 8%;
 
-.leftsection{
-    text-align: left;
-    height: 90vh;
-    width: 35vw;
-    padding: 0px 5px;
-    /* background-color: purple; */
-}
-
-.learnmorebutton{
-    border: 1px solid grey;
-    height: 56px;
-    width: 110px;
-    border-radius: 10px;
-    background: none;
-    color: black;
-    display: block;
-    margin: auto;
-
-}
-
-.rightsection{
-    height: 100vh;
-    width: 65vw;
+    background: #f8fafc;
 
     overflow: hidden;
-    /* background-color: yellow; */
-}  
-
-.landingpageimg{
-    height: 75%;
-    width: 100%;
-
-    object-fit: cover;
 }
 
-.titletextheading{
-    font-size: 90px;
-    margin: 5px;
-    padding: 10px 5px;
-}
-.subtitletext{
-    font-size: 25px;
-    color: grey;
-    margin: 10px 2px;
-    padding: 50px 0px;
+/* =========================
+   Left Section
+========================= */
+
+.leftsection {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 620px;
 }
 
-.purpleheadingtext{
+.titletextheading {
+    margin: 0;
+
+    font-size: 72px;
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    color: #111827;
+}
+
+.purpleheadingtext {
     color: #7C3AED;
 }
 
+.subtitletext {
+    margin: 28px 0 40px;
 
-.buttons-container{
+    font-size: 20px;
+    line-height: 1.8;
+
+    color: #6b7280;
+
+    max-width: 540px;
+}
+
+/* =========================
+   Buttons
+========================= */
+
+.buttons-container {
     display: flex;
-    justify-content: left;
     align-items: center;
-    padding: 10px 50px;
 
+    gap: 18px;
+}
+
+.learnmorebutton {
+    height: 52px;
+
+    padding: 0 28px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.learnmorebutton:hover {
+    background: #f3f4f6;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   Right Section
+========================= */
+
+.rightsection {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingpageimg {
+    width: 100%;
+    max-width: 720px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    animation: float 3s ease-in-out infinite;
+}
+
+/* =========================
+   Floating Animation
+========================= */
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 992px) {
+
+    .landingpagecontainer {
+        flex-direction: column-reverse;
+
+        text-align: center;
+
+        padding: 40px 24px;
+    }
+
+    .leftsection {
+        align-items: center;
+    }
+
+    .titletextheading {
+        font-size: 56px;
+    }
+
+    .subtitletext {
+        font-size: 18px;
+    }
+
+    .buttons-container {
+        justify-content: center;
+    }
+
+    .rightsection {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .titletextheading {
+        font-size: 42px;
+    }
+
+    .subtitletext {
+        font-size: 16px;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .buttons-container button {
+        width: 100%;
+    }
 }

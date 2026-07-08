@@ -1,13 +1,19 @@
 import { AwardIcon, Pencil } from 'lucide-react';
 import './TaskList.css';
 import { FiTrash2 } from 'react-icons/fi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getToken } from '../../../utils/auth';
 import AddtaskForm from './AddtaskForm';
 
-function TaskList({ setTaskToView, setViewTaskDetails, task, setTask, activeFilter, setMode, setTaskToedit, setShowForm }) {
+function TaskList({ getTask, setTaskToView, setViewTaskDetails, task, setTask, activeFilter, setMode, setTaskToedit, setShowForm }) {
     const filteredTask = activeFilter ? (activeFilter === "All" ? task : task.filter((f) => f.status === activeFilter.toLowerCase())) : task;
+    
+    useEffect(() => {
+    getTask();
+  }, []);
+
+
     async function handleDeleteTask(id) {
         try {
 
@@ -81,8 +87,8 @@ function TaskList({ setTaskToView, setViewTaskDetails, task, setTask, activeFilt
 
                                 <div className="task-right-section">
                                     <span className={`task-status ${task.status}`}>{task.status}</span>
-                                    <Pencil onClick={() => handleEditTask(task)} className='edit-task-button' size={20} />
-                                    <FiTrash2 onClick={() => handleDeleteTask(task.id)} className="delete-task-button" size={20} />
+                                    <Pencil onClick={() => handleEditTask(task)} className='edit-task-button' size={40} />
+                                    <FiTrash2 onClick={() => handleDeleteTask(task.id)} className="delete-task-button" size={40} />
                                 </div>
                             </div>
 

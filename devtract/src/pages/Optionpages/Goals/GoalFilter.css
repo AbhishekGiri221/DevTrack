@@ -1,32 +1,64 @@
-.filters {
+.goal-filters {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    gap: 12px;
+
+    padding: 8px;
+
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    width: fit-content;
 }
 
-.filters button {
-    height: 50px;
-    width: 100px;
-
+.goal-filters button {
     border: none;
 
+    min-width: 110px;
+    height: 44px;
+
+    padding: 0 18px;
+
     border-radius: 10px;
+
+    background-color: transparent;
+    color: #6b7280;
+
+    font-size: 14px;
+    font-weight: 500;
+
     cursor: pointer;
 
-    transition: all 0.3s ease-in;
+    transition: all 0.25s ease;
 }
 
-.filters button:hover {
-    background-color: var(--primary-color);
-    color: white;
-    scale: 1.1;
-}
-.nonactive{
-    background-color: white;
-    color: black;
+/* Normal button hover */
+.goal-filters button:hover {
+    background-color: #f5f3ff;
+    color: #7C3AED;
+
+    transform: translateY(-2px);
 }
 
-.active {
-    background-color: var(--primary-color);
+/* Active button */
+.goal-filters button.active-goal-filter {
+    background-color: #7C3AED;
     color: white;
+
+    font-weight: 600;
+
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+/* Active button hover */
+.goal-filters button.active-goal-filter:hover {
+    background-color: #6D28D9;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(124, 58, 237, 0.35);
 }

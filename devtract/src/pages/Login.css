@@ -1,81 +1,292 @@
-.Login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid grey;
-    margin: 2% auto;
-    padding: 2% 0 8% 0;
-    width: 35%;
-    border-radius: 25px;
+/* ==========================
+   Login Page
+========================== */
+
+.Login-container{
+    width:100%;
+    max-width:460px;
+
+    margin:70px auto;
+    padding:50px 42px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    background:#ffffff;
+
+    border:1px solid #ececec;
+    border-radius:24px;
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.05),
+        0 2px 8px rgba(0,0,0,.03);
+
+    transition:.3s ease;
 }
 
-.Loginpage-Logo {
-    height: 74px;
-    width: auto;
-    margin: 15% 0 0 0;
+.Login-container:hover{
+    transform:translateY(-4px);
 }
 
-.middleText {
-    margin: 30px 0px;
+/* ==========================
+   Logo
+========================== */
+
+.Loginpage-Logo{
+    width:190px;
+    height:auto;
+
+    margin-bottom:24px;
 }
 
-.Welcome-heading-text {
-    margin: 20px;
+/* ==========================
+   Heading
+========================== */
+
+.middleText{
+    text-align:center;
+    margin-bottom:36px;
 }
 
-.Welcome-subtext {
-    color: grey;
-    margin: 10px;
+.Welcome-heading-text{
+
+    margin:0;
+
+    font-size:34px;
+    font-weight:700;
+
+    color:#111827;
 }
 
-.Input-fields-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+.Welcome-subtext{
+
+    margin-top:10px;
+
+    color:#6b7280;
+
+    font-size:15px;
+    line-height:1.6;
 }
 
-.Email-inputfield:focus{
-    outline: none;
+/* ==========================
+   Form
+========================== */
+
+.Input-fields-container{
+
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:20px;
 }
 
-.passwordinputfield-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ==========================
+   Input
+========================== */
 
+.field-style{
+
+    width:100%;
+    height:58px;
+
+    padding:0 18px;
+
+    border:1px solid #d1d5db;
+    border-radius:16px;
+
+    background:#ffffff;
+
+    font-size:15px;
+
+    transition:.25s ease;
+
+    box-sizing:border-box;
 }
 
-.passwordinputfield-container input {
-    border: none;
+.field-style::placeholder{
+    color:#9ca3af;
+}
 
+.field-style:hover{
+    border-color:#b5b5b5;
+}
+
+.field-style:focus{
+    outline:none;
+
+    border-color:#7c3aed;
+
+    box-shadow:0 0 0 5px rgba(124,58,237,.12);
+}
+
+/* ==========================
+   Password
+========================== */
+
+.passwordinputfield-container{
+
+    display:flex;
+    align-items:center;
+
+    height:58px;
+
+    padding:0 18px;
+
+    border:1px solid #d1d5db;
+    border-radius:16px;
+
+    background:#fff;
+
+    transition:.25s ease;
+
+    box-sizing:border-box;
+}
+
+.passwordinputfield-container:hover{
+    border-color:#b5b5b5;
+}
+
+.passwordinputfield-container:focus-within{
+
+    border-color:#7c3aed;
+
+    box-shadow:0 0 0 5px rgba(124,58,237,.12);
 }
 
 .Password-inputfield{
-    width: 100%;
-    height: 40px;
-}
 
-.Password-inputfield:focus{
-    outline: none;
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
 }
 
 .Password-eyeicon{
-    cursor: pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    color:#6b7280;
+
+    cursor:pointer;
+
+    transition:.25s ease;
 }
 
-.field-style{
-    height: 45px;
-    width: 350px;
-    border: 1px solid black;
-    padding: 15px;
-    border-radius: 5px;
+.Password-eyeicon:hover{
+
+    background:#f3f4f6;
+
+    color:#7c3aed;
 }
+
+/* ==========================
+   Button
+========================== */
 
 .Login-button{
-    background-color: var(--primary-color);
-    color: var(--primaryfont-color);
-    cursor: pointer;
+
+    width:100%;
+    height:58px;
+
+    border:none;
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#7C3AED,#8B5CF6);
+
+    color:#fff;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+    box-shadow:0 10px 24px rgba(124,58,237,.28);
+}
+
+.Login-button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(124,58,237,.35);
+}
+
+.Login-button:active{
+
+    transform:scale(.98);
+}
+
+/* ==========================
+   Bottom Text
+========================== */
+
+.Input-fields-container p{
+
+    margin-top:8px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#6b7280;
+}
+
+.Input-fields-container a{
+
+    color:#7c3aed;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.Input-fields-container a:hover{
+
+    color:#6d28d9;
+
+    text-decoration:underline;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:600px){
+
+    .Login-container{
+
+        width:calc(100% - 30px);
+
+        margin:30px auto;
+
+        padding:36px 24px;
+    }
+
+    .Welcome-heading-text{
+        font-size:28px;
+    }
+
+    .field-style,
+    .passwordinputfield-container,
+    .Login-button{
+        height:54px;
+    }
+
 }

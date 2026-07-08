@@ -2,33 +2,51 @@ import { FiX } from 'react-icons/fi';
 import './GoalForm.css';
 import { useState } from 'react';
 import GoalIconPicker from './GoalIconPicker';
+import {getToken} from '../../../utils/auth';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function GoalForm({ onClose }) {
-    const [goalTitle, setGoalTitle] = useState("");
-    const [goalDescription, setGoalDescription] = useState("");
-    const [targetDate, setTargetdate] = useState("");
-    const [goalPriority, setGoalPriority] = useState("Medium");
-    const [selectedIcon, setSelectedIcon] = useState("");
+function GoalForm({setGoalList, onClose }) {
 
-    function handleSubmit(){
-        const content = {
-            id: Date.now(),
-            goalTitle,
-            goalDescription,
-            targetDate,
-            goalPriority,
-            selectedIcon,
-        }
+    const[goalFormData, setGoalFormData] = useState({
+        selectedIcon:"",
+        goalTitle:"",
+        goalDescription:"",
+        targetDate:"",
+        goalPriority:"",
+    })
 
-        const existingGoals = localStorage.getItem("goal") || [];
-        
-        existingGoals.push(content);
+    const navigate = useNavigate();
 
-        localStorage.setItem("goal",JSON.stringify(content));
 
-        onClose();
+    async function handleSubmit(e){
+        e.preventDefault();
+        const token = getToken();
+        try {
+            const response = await axios.post("http://localhost:3000/app/goals",
+                goalFormData,
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            console.log(`the response is ${JSON.stringify(response.data)}`);
+            setGoalList(response.data);
+            onClose();
+
+        } catch (error) {
+            if(error?.response?.status === 401){
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+            alert(error?.message);
+        }   
     }
 
+    function handleValue(e){
+        setGoalFormData((prev)=> ({...prev, [e.target.name] : e.target.value}));
+    }
     return (
         <>
             <div className="overlay-layer">
@@ -52,16 +70,17 @@ function GoalForm({ onClose }) {
                                 <span>Select Icon</span>
 
                                 <GoalIconPicker
-                                    selectedIcon={selectedIcon}
-                                    setSelectedIcon={setSelectedIcon}
+                                    selectedIcon={goalFormData.selectedIcon}
+                                    setSelectedIcon={(value)=> setGoalFormData((prev)=> ({...prev, selectedIcon : value}))}
                                 />                            </div>
                             <div className="goal-title flex-property field-gap">
                                 <span>Goal title</span>
                                 <input
+                                    name='goalTitle'
                                     type='text'
-                                    value={goalTitle}
+                                    value={goalFormData.goalTitle}
                                     placeholder='Enter your goal'
-                                    onChange={(e) => setGoalTitle(e.target.value)}
+                                    onChange={handleValue}
                                     className='goal-title-input-field'
                                 />
                             </div>
@@ -69,9 +88,10 @@ function GoalForm({ onClose }) {
                             <div className="goal-description flex-property field-gap ">
                                 <span>Description</span>
                                 <textarea
+                                    name='goalDescription'
                                     placeholder='Describe your goal'
-                                    value={goalDescription}
-                                    onChange={(e) => setGoalDescription(e.target.value)}
+                                    value={goalFormData.goalDescription}
+                                    onChange={handleValue}
                                     className='goal-description-input-field'
                                 />
                             </div>
@@ -82,10 +102,11 @@ function GoalForm({ onClose }) {
 
                                     <span>Target Date</span>
                                     <input
+                                        name='targetDate'
                                         type="date"
                                         min={new Date().toISOString().split("T")[0]}
-                                        value={targetDate}
-                                        onChange={(e) => setTargetdate(e.target.value)}
+                                        value={goalFormData.targetDate}
+                                        onChange={handleValue}
                                         className='target-date-input-field'
                                     />
                                 </div>
@@ -93,13 +114,14 @@ function GoalForm({ onClose }) {
                                 <div className="priority-cotainer flex-property field-gap">
                                     <span>Priority</span>
                                     <select
-                                        value={goalPriority}
-                                        onChange={(e) => setGoalPriority(e.target.value)}
+                                        name='goalPriority'
+                                        value={goalFormData.goalPriority}
+                                        onChange={handleValue}
                                         className='goal-priority-field'
                                     >
-                                        <option>Medium</option>
-                                        <option>High</option>
-                                        <option>Low</option>
+                                        <option value={"Medium"}>Medium</option>
+                                        <option value={"High"}>High</option>
+                                        <option value={"Low"}>Low</option>
                                     </select>
                                 </div>
                             </div>

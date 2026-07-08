@@ -67,6 +67,7 @@ function Login() {
                             placeholder='Password'
                             className='Password-inputfield'
                             onChange={(handleLoginChange)}
+                            autoComplete='current-password'
 
                         />
 
@@ -80,7 +81,7 @@ function Login() {
                         </span>
                     </div>
 
-                    <button onClick={checkUser} className='Login-button field-style'>Login</button>
+                    <button onClick={checkUser} className='Login-button'>Login</button>
 
                     <p>Don't have an account? <a href='/signup'>Sign up </a></p>
                 </div>

@@ -3,7 +3,7 @@ import TaskList from '../Tasks/TaskList';
 import './Dashboard.css';
 import ViewTask from '../Tasks/ViewTask';
 
-function Dashboard({ taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, setShowForm, showForm, task, setTask, activeFilter, setMode, mode }) {
+function Dashboard({ getTask, taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, setShowForm, showForm, task, setTask, activeFilter, setMode, mode }) {
     async function getDashboardDetails() {
         // const taskList = await 
     }
@@ -39,7 +39,7 @@ function Dashboard({ taskToView, setTaskToView, viewTaskDetails, setViewTaskDeta
                 <div className="bottom-dashboard-container">
                     <div className="task-container">
                         <h3>My Tasks</h3>
-                        <TaskList setTaskToView={setTaskToView} setViewTaskDetails={setViewTaskDetails} task={task} setTask={setTask} activeFilter={activeFilter} setMode={setMode} setTaskToedit={setTaskToedit} setShowForm={setShowForm} />
+                        <TaskList getTask={getTask} setTaskToView={setTaskToView} setViewTaskDetails={setViewTaskDetails} task={task} setTask={setTask} activeFilter={activeFilter} setMode={setMode} setTaskToedit={setTaskToedit} setShowForm={setShowForm} />
                     </div>
 
                     <div className="motivation-container">

@@ -81,7 +81,7 @@ function Optionbar() {
 
                 <div className="logout-container">
 
-                    <NavLink to="/logout" className={getNavClass}>
+                    <NavLink onClick={()=>localStorage.removeItem("token")} to="/login" className={getNavClass}>
                         <LuLogOut size={22} color="red" />
                         <span style={{color:'red'}}>Logout</span>
                     </NavLink>

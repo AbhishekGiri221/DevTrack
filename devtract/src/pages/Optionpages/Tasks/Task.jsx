@@ -7,7 +7,7 @@ import { Activity, CheckCircle2, Clock3, LayoutGrid } from "lucide-react";
 import ViewTask from "./ViewTask";
 
 
-function Tasks({taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm, task, setTask, filters, setActiveFilter, activeFilter }) {
+function Tasks({getTask, taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, mode, setMode, setShowForm, showForm, task, setTask, filters, setActiveFilter, activeFilter }) {
 
     const icons = {
         "All": <LayoutGrid />,
@@ -53,14 +53,25 @@ function Tasks({taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, 
             )}
 
             <div className="task-list-container">
-                <div>
-                    <h4 className="task-head">Tasks</h4>
+                <div className="task-list-header">
+        <h2>Tasks</h2>
+        <span>{task?.length || 0} Tasks</span>
+    </div>
 
-                </div>
-
-                <div className="list-container">
-                    <TaskList setTaskToView ={setTaskToView} setViewTaskDetails ={setViewTaskDetails} task={task} setTask={setTask} activeFilter={activeFilter} mode = {mode} setMode={setMode} setShowForm={setShowForm} setTaskToedit = {setTaskToedit}/>
-                </div>
+    <div className="list-container">
+        <TaskList
+            getTask={getTask}
+            setTaskToView={setTaskToView}
+            setViewTaskDetails={setViewTaskDetails}
+            task={task}
+            setTask={setTask}
+            activeFilter={activeFilter}
+            mode={mode}
+            setMode={setMode}
+            setShowForm={setShowForm}
+            setTaskToedit={setTaskToedit}
+        />
+    </div>
 
                 {
                     viewTaskDetails && (

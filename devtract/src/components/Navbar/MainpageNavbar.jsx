@@ -7,13 +7,17 @@ function MainpageNavbar() {
     return (
         <>
             <div className="secondnavbar-container">
-                <Bell className="notification-button" size={23}/>
+                <button className="icon-button">
+                    <Bell size={22} />
+                </button>
+
                 <ThemeButton />
+
                 <div className="profile-photo">
-                    <Profilepic className="proile-pic"/>
+                    <Profilepic className="proile-pic" />
                 </div>
             </div>
-            
+
         </>
     )
 }

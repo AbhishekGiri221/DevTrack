@@ -1,45 +1,97 @@
-.Navcontainer {
+.Navcontainer{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    margin: 0px;
-    padding: 0px;
+    height: 72px;
+    width: 100%;
 
-    background-color: #ffffff;
-    position: sticky; 
+    padding: 0 40px;
 
-    top: 0;
-    left: 0;
-    right: 0;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(12px);
 
-    height: 70px;
-    z-index: 1000;
+    border-bottom: 1px solid #ececec;
 
-    padding: 20px 30px;
+    box-sizing: border-box;
 }
 
-
-.Navoptions ul {
-    list-style: none;
+.Navoptions{
+    flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 150px;
 }
 
-.Getstartedbutton {
-    border: none;
-    height: 50px;
-    width: 100px;
-    border-radius: 10px;
-    background: #7C3AED;
-    color: white;
+.Navoptions ul{
+    display: flex;
+    align-items: center;
+    gap: 48px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Navoptions li{
+    position: relative;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    color: #4b5563;
+
+    cursor: pointer;
+
+    transition: color .25s ease;
+}
+
+.Navoptions li:hover{
+    color: #7c3aed;
+}
+
+.Navoptions li::after{
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #7c3aed;
+
+    transition: width .25s ease;
+}
+
+.Navoptions li:hover::after{
+    width: 100%;
 }
 
 .rightsection-nav-buttons{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 210px;
+    gap: 16px;
+}
+
+@media(max-width:900px){
+
+    .Navcontainer{
+        padding:0 20px;
+    }
+
+    .Navoptions ul{
+        gap:24px;
+    }
+}
+
+@media(max-width:700px){
+
+    .Navoptions{
+        display:none;
+    }
 }

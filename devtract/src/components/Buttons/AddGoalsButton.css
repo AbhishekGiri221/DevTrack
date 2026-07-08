@@ -1,17 +1,37 @@
-.add-goals-button {
+.add-goals-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    height: 48px;
+    min-width: 120px;
+
+    padding: 0 18px;
+
     border: none;
-    height: 50px;
-    width: 100px;
     border-radius: 10px;
-    background: #7C3AED;
+
+    background-color: #7C3AED;
     color: white;
 
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease-in;
+    font-size: 14px;
+    font-weight: 500;
 
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
-.add-goals-button:hover {
-    font-size: 1rem;
+.add-goals-button:hover{
+    background-color: #6D28D9;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(124, 58, 237, 0.25);
+}
+
+.add-goals-button:active{
+    transform: translateY(0);
 }

@@ -1,167 +1,214 @@
+/* ==========================
+   Page
+========================== */
+
 .task-wrapper-container {
-   display: flex;
-   flex-direction: column;
+    min-height: 100vh;
 
-   width: 100%;
-   min-height: 92vh;
+    display: flex;
+    flex-direction: column;
 
-   padding: 40px 6%;
-   gap: 30px;
+    gap: 24px;
 
-   background: var(--mainpage-background-color);
+    padding: 30px;
+
+    background: #f8fafc;
 }
+
+/* ==========================
+   Header
+========================== */
 
 .task-heading-container {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-
-   /* background-color: yellow; */
-
-   width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.filter-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.task-left-head {
+    display: flex;
+    flex-direction: column;
 
-   width: 100%;
-   height: 100px;
-   /* background-color: #7C3AED; */
+    gap: 6px;
+}
+
+.task-left-head h1 {
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.task-left-head span {
+    font-size: 15px;
+
+    color: #6b7280;
+}
+
+.task-right-head {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+/* ==========================
+   Filter Card
+========================== */
+
+.filter-container {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 14px 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
 }
 
 .filter-list {
+    display: flex;
 
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
+    gap: 16px;
 
-   width: 100%;
-   min-height: 72px;
+    list-style: none;
 
-   padding: 15px 30px;
-
-   list-style: none;
-
-   background: white;
-
-   border-radius: 14px;
-
-   box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    padding: 0;
+    margin: 0;
 }
 
-.filter-list li {
-   cursor: pointer;
-   list-style-type: none;
+.filters {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    color: #6b7280;
+
+    transition: .25s;
 }
 
-.filters{
+.filters:hover {
+    background: #f5f3ff;
 
-   display:flex;
-   align-items:center;
-   justify-content:center;
+    color: #7c3aed;
 
-   gap:10px;
-
-   padding:12px 22px;
-
-   border-radius:10px;
-
-   cursor:pointer;
-
-   transition:
-      background .25s,
-      color .25s,
-      transform .25s;
+    transform: translateY(-2px);
 }
 
-.filters:hover{
+.active-filter {
+    background: #ede9fe;
 
-   background:#f5f3ff;
+    color: #7c3aed;
 
-   color:#7C3AED;
-
-   transform:translateY(-2px);
+    font-weight: 600;
 }
 
-.active-filter{
-
-   background:#ede9fe;
-
-   color:#7C3AED;
-
-   font-weight:600;
-
-   box-shadow:0 4px 10px rgba(124,58,237,.18);
-}
-
-
+/* ==========================
+   Task List Card
+========================== */
 
 .task-list-container{
+    display:flex;
+    flex-direction:column;
 
-   width:100%;
+    width:100%;
+   height: 500px;
+    background:#ffffff;
 
-   background:white;
+    border-radius:18px;
 
-   border-radius:16px;
+    padding:24px;
 
-   padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
 
-   box-shadow:0 8px 25px rgba(0,0,0,.06);
+.task-list-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-bottom:18px;
+
+    margin-bottom:20px;
+
+    border-bottom:1px solid #ececec;
+}
+
+.task-list-header h2{
+    margin:0;
+
+    font-size:24px;
+    font-weight:700;
+
+    color:#111827;
+}
+
+.task-list-header span{
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    background:#F3EDFF;
+
+    color:#7C3AED;
+
+    font-size:14px;
+    font-weight:600;
 }
 
 .list-container{
+    display:flex;
+    flex-direction:column;
 
-   display:flex;
-   flex-direction:column;
+    gap:18px;
 
-   gap:14px;
+    max-height:520px;
 
-   height: 390px;
-   overflow-y:auto;
+    overflow-y:auto;
 
-   padding-right:6px;
-
+    padding-right:8px;
 }
 
+/* ==========================
+   Scrollbar
+========================== */
+
+.list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+
+    border-radius: 20px;
+}
+
+.list-container::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* ==========================
+   Modal
+========================== */
 
 .modal-overlay {
-   position: fixed;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
+    position: fixed;
+    inset: 0;
 
-   background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0,0,0,.55);
 
-   display: flex;
-   justify-content: center;
-   align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-   z-index: 1000;
-}
+    backdrop-filter: blur(3px);
 
-.task-head{
-   margin: 5px 0px 10px 20px;
-
-}
-
-.list-container::-webkit-scrollbar{
-
-    width:8px;
-}
-.list-container::-webkit-scrollbar-track{
-
-    background:transparent;
-}
-.list-container::-webkit-scrollbar-thumb{
-
-    background:#d8d8d8;
-
-    border-radius:20px;
-}
-.list-container::-webkit-scrollbar-thumb:hover{
-
-    background:#bdbdbd;
+    z-index: 1000;
 }

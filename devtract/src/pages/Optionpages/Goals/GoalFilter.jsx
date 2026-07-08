@@ -5,12 +5,12 @@ function GoalFilter() {
     const [activeFilter, setActiveFilter] = useState("All Goals");
     return (
         <>
-            <div className="filters">
+            <div className="goal-filters">
                 {filters.map((filter,index) => {
                     return (
                         <button
                             key={index}
-                            className={activeFilter === filter ? "active" : "nonactive"}
+                            className={activeFilter === filter ? "active-goal-filter" : "nonactive"}
                             onClick={()=>setActiveFilter(filter)}
                         >
 
