@@ -3,8 +3,14 @@ import './GoalsList.css';
 import { icons } from './goalIcon';
 import { Pencil } from 'lucide-react';
 import { FiTrash2 } from 'react-icons/fi';
-function GoalsList({ goalList }) {
-    const date = new Date().toISOString().split("T")[0];
+import { useContext, useState } from 'react';
+import { GoalContext } from '../../../context/GoalContext';
+import GoalCompletionRate from './GoalCompletionRate';
+import { useNavigate } from 'react-router-dom';
+function GoalsList() {
+    const { goalList } = useContext(GoalContext);
+    const navigate = useNavigate();
+    // const date = new Date().toISOString().split("T")[0];
     return (
         <>
             <div className="goal-list-container">
@@ -23,17 +29,34 @@ function GoalsList({ goalList }) {
                                     }}> {Icon && <Icon size={40} />}</div>
                                     <div className="goal-list-content">
                                         <h2>{goal.title}</h2>
-                                        <span>{goal.description}</span>
-                                        <span>{goal.duedate}</span>
+
+                                        <p>{goal.description}</p>
+
+                                        <div className="goal-meta">
+                                            <span
+                                                className={`goal-status ${goal.status
+                                                    ?.toLowerCase()
+                                                    .replace(/\s+/g, "")}`}
+                                            >
+                                                {goal.status}
+                                            </span>
+
+                                            <span className="goal-date">
+                                                🎯 {goal.duedate}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="goal-completion-rate">
+                                    <GoalCompletionRate />
                                     <div className="goal-action-buttons">
-                                        <Pencil className="edit-goal-button" size={40} />
-                                        <FiTrash2 className="delete-goal-button" size={40} />
+                                        {/* <Pencil className="edit-goal-button" size={40} />
+                                        <FiTrash2 className="delete-goal-button" size={40} /> */}
+
+                                        {/* <p onClick={()=> navigate(`${goal.id}`)}>{`>`}</p> */}
+                                        <p onClick={()=> navigate(`/app/goals/${goal.id}`)}>{`>`}</p>
                                     </div>
-                                    <h1>completion rate</h1>
                                 </div>
                             </div>
                         )

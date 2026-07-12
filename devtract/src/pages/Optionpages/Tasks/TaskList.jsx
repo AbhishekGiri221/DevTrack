@@ -96,7 +96,7 @@ function TaskList({ getTask, setTaskToView, setViewTaskDetails, task, setTask, a
                     })
 
                     :
-                    <h1 className='content-before-task'>{`Nothing ${activeFilter}`}</h1>
+                    <h1 className='content-before-task'>{task?.length === 0 ? `Add task` : `Nothing ${activeFilter}`}</h1>
             }
         </>
     )

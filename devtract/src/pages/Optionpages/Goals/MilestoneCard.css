@@ -1,0 +1,157 @@
+.milestone-card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:20px 24px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+}
+
+.milestone-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.milestone-left{
+
+    display:flex;
+
+    gap:16px;
+
+}
+
+.done-icon{
+
+    color:#22C55E;
+
+}
+
+.pending-icon{
+
+    color:#D1D5DB;
+
+}
+
+.milestone-left h3{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.milestone-left p{
+
+    margin-top:6px;
+
+    color:#6B7280;
+
+}
+
+.milestone-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.status{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.status.completed{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status.in-progress{
+
+    background:#EDE9FE;
+
+    color:#6D28D9;
+
+}
+
+.status.not-started{
+
+    background:#F3F4F6;
+
+    color:#6B7280;
+
+}
+
+.date{
+
+    color:#6B7280;
+
+    font-size:13px;
+
+}
+
+.milestone-right button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
+.subtask-list{
+
+    margin-top:20px;
+
+    margin-left:42px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.subtask{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.subtask-done{
+
+    color:#7C3AED;
+
+}
+
+.subtask-pending{
+
+    color:#D1D5DB;
+
+}

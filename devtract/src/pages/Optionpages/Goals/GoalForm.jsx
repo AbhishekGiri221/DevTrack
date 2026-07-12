@@ -5,15 +5,17 @@ import GoalIconPicker from './GoalIconPicker';
 import {getToken} from '../../../utils/auth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import GoalStatusOption from './GoalStatusOption';
 
-function GoalForm({setGoalList, onClose }) {
+function GoalForm({goalStatus, setGoalList, onClose }) {
 
     const[goalFormData, setGoalFormData] = useState({
         selectedIcon:"",
         goalTitle:"",
         goalDescription:"",
         targetDate:"",
-        goalPriority:"",
+        currentStatus:"inprogress",
+        goalPriority:"Medium",
     })
 
     const navigate = useNavigate();
@@ -109,6 +111,11 @@ function GoalForm({setGoalList, onClose }) {
                                         onChange={handleValue}
                                         className='target-date-input-field'
                                     />
+                                </div>
+
+                                <div className='goal-status flex-property field-gap'>
+                                    <span>Status</span>
+                                    <GoalStatusOption goalFormData={goalFormData} setGoalFormData={setGoalFormData} goalStatus={goalStatus}/>
                                 </div>
 
                                 <div className="priority-cotainer flex-property field-gap">

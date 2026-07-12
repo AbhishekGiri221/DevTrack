@@ -200,8 +200,6 @@
 }
 
 .cancel-button:hover {
-
-    background: #e7e7e7;
-
-    transform: translateY(-2px);
+    background: #f3f4f6;
+    transform: rotate(90deg);
 }

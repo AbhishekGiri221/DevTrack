@@ -1,0 +1,31 @@
+
+.completion-progress-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.completion-progress-track {
+    flex: 1;
+    height: 10px;
+    background: #E5E7EB;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.completion-rate {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #7C3AED, #22C55E);
+    transition: width 0.4s ease;
+}
+
+.completion-percentage {
+    min-width: 42px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+}

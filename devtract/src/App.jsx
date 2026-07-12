@@ -16,6 +16,10 @@ import { useEffect, useState } from 'react'
 import Signup from './pages/Signup'
 import { getToken } from './utils/auth'
 import axios from 'axios'
+import GoalProvider from './context/GoalContext'
+import GoalDetails from './pages/Optionpages/Goals/GoalDetails'
+import GoalCompletionRateProvider from './context/GoalCompleteRateContext'
+import MileStoneContext from './context/MileStoneContext'
 
 function App() {
 
@@ -28,9 +32,6 @@ function App() {
   const [viewTaskDetails, setViewTaskDetails] = useState(false);
   const [taskToView, setTaskToView] = useState(null);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   getTask();
-  // }, []);
 
   async function getTask() {
     const token = getToken();
@@ -48,12 +49,12 @@ function App() {
       setTask(temporaryTask.data);
 
     } catch (error) {
-      if(error?.response?.status === 401){
+      if (error?.response?.status === 401) {
         localStorage.removeItem("token");
         navigate("/login");
       }
       alert(`it is in App ${error?.response?.status}`);
-      
+
     }
 
   }
@@ -71,14 +72,19 @@ function App() {
         {/* Protected Layout */}
         <Route path='/app' element={
           <ProtectedRoute>
-            <Mainpage />
+            <GoalProvider>
+              <GoalCompletionRateProvider>
+                <Mainpage />
+                
+              </GoalCompletionRateProvider>
+            </GoalProvider>
           </ProtectedRoute>
         }>
           <Route index element={<Navigate to='/app/dashboard' />} />
-
-          <Route path='dashboard' element={<Dashboard getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
-          <Route path='tasks' element={<Tasks getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm = {showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
+          <Route path='dashboard' element={<Dashboard getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm={showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
           <Route path='goals' element={<Goals />} />
+          <Route path='goals/:id' element={<MileStoneContext><GoalDetails /></MileStoneContext>} />
+          <Route path='tasks' element={<Tasks getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm={showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
           <Route path='notes' element={<Notes />} />
           <Route path='profile' element={<Profile />} />
           <Route path='settings' element={<Settings />} />

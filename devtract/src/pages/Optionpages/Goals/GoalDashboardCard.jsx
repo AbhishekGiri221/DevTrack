@@ -1,8 +1,29 @@
 import { CircleCheck, Target, TrendingUp, PieChart } from 'lucide-react';
 import './GoalDashboardCard.css';
 import { BiColor } from 'react-icons/bi';
+import { useContext } from 'react';
+import { GoalContext } from '../../../context/GoalContext';
 
-function GoalDashboardCard({ goalList }) {
+function GoalDashboardCard() {
+    const {goalList} = useContext(GoalContext);
+    function activeGoalLength() {
+        const active = goalList?.filter((goal)=> goal.status === "inprogress")
+
+        return active?.length;
+    }
+
+    function completedGoalLength(){
+        const completed = goalList?.filter((goal)=> goal.status === "completed")
+
+        return completed?.length;
+    }
+
+    function overallProgress() {
+        if(!goalList?.length) return `${0}%`;
+
+        return `${Math.round((completedGoalLength() / goalList.length) * 100)}%`;
+    }
+
     const cardDetails = [
         {
             title: "Total Goals",
@@ -19,7 +40,7 @@ function GoalDashboardCard({ goalList }) {
             title: "Active Goals",
             icon: TrendingUp,
             stats: {
-                value: 4,
+                value: activeGoalLength(),
                 subtitle: "In Progress"
             },
             theme: {
@@ -30,7 +51,7 @@ function GoalDashboardCard({ goalList }) {
             title: "Completed Goals",
             icon: CircleCheck,
             stats: {
-                value: 4,
+                value: completedGoalLength(),
                 subtitle: "Completed"
             },
             theme: {
@@ -41,7 +62,7 @@ function GoalDashboardCard({ goalList }) {
             title: "Overall Progress",
             icon: PieChart,
             stats: {
-                value: "75%",
+                value: overallProgress(),
                 subtitle: "Keep it up!"
             },
             theme: {

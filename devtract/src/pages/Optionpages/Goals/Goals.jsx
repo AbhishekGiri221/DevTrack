@@ -4,39 +4,18 @@ import GoalDashboardCard from "./GoalDashboardCard";
 import GoalFilter from "./GoalFilter";
 import GoalsList from "./GoalsList";
 import GoalForm from "./GoalForm";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchBar from "../../../components/Buttons/SearchBar";
 import { getToken } from '../../../utils/auth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { GoalContext } from '../../../context/GoalContext';
 
 function Goals() {
     const [showGoalForm, setShowGoalForm] = useState(false);
-    const [goalList, setGoalList] = useState();
-    const navigate = useNavigate();
-    useEffect(() => {
-        async function getGoals() {
-            
-            const token = getToken();
-            try {
-                const response = await axios.get("http://localhost:3000/app/goals", {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-    
-                setGoalList(response.data);
-            } catch (error) {
-                if (error?.response?.status === 401) {
-                    localStorage.removeItem("token");
-                    navigate("/login");
-                }
-    
-                alert(error?.message);
-            }
-        }
-    getGoals();
-    }, []);
+    const {goalList, setGoalList} = useContext(GoalContext);
+    const goalStatus = ["completed","inprogress","hold"];
+
 
     return (
         <>
@@ -53,10 +32,10 @@ function Goals() {
                     </div>
                 </div>
 
-                {showGoalForm && <GoalForm setGoalList={setGoalList} onClose={() => setShowGoalForm((prev) => !prev)} />}
+                {showGoalForm && <GoalForm goalStatus={goalStatus} setGoalList={setGoalList} onClose={() => setShowGoalForm((prev) => !prev)} />}
 
                 <div className="goals-dashboard-card-container">
-                    <GoalDashboardCard goalList={goalList} />
+                    <GoalDashboardCard />
                 </div>
 
                 <div className="goals-bottom-container">

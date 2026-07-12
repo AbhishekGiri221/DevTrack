@@ -2,11 +2,11 @@ import AddtaskForm from '../Tasks/AddtaskForm';
 import TaskList from '../Tasks/TaskList';
 import './Dashboard.css';
 import ViewTask from '../Tasks/ViewTask';
+import { useContext } from 'react';
+import { GoalContext } from '../../../context/GoalContext';
 
-function Dashboard({ getTask, taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, setShowForm, showForm, task, setTask, activeFilter, setMode, mode }) {
-    async function getDashboardDetails() {
-        // const taskList = await 
-    }
+function Dashboard({ getTask, taskToView, setTaskToView, viewTaskDetails, setViewTaskDetails, taskToedit, setTaskToedit, setShowForm, showForm, task, setTask, activeFilter,setMode, mode }) {
+    const {goalList} = useContext(GoalContext);
 
 
     return (
@@ -19,11 +19,11 @@ function Dashboard({ getTask, taskToView, setTaskToView, viewTaskDetails, setVie
 
                 <div className="stats-container">
                     <div className="task-stats stats">
-                        <span className='task-number stats-completion-rate'>{task.length}</span>
+                        <span className='task-number stats-completion-rate'>{task?.length}</span>
                         <span className='stats-name'>Tasks</span>
                     </div>
                     <div className="goals-stats stats">
-                        <span className='goal-number stats-completion-rate'>12</span>
+                        <span className='goal-number stats-completion-rate'>{goalList?.length}</span>
                         <span className='stats-name'>Goals</span>
                     </div>
                     <div className="streak-stats stats">
@@ -39,7 +39,7 @@ function Dashboard({ getTask, taskToView, setTaskToView, viewTaskDetails, setVie
                 <div className="bottom-dashboard-container">
                     <div className="task-container">
                         <h3>My Tasks</h3>
-                        <TaskList getTask={getTask} setTaskToView={setTaskToView} setViewTaskDetails={setViewTaskDetails} task={task} setTask={setTask} activeFilter={activeFilter} setMode={setMode} setTaskToedit={setTaskToedit} setShowForm={setShowForm} />
+                        <TaskList getTask={getTask} setTaskToView={setTaskToView} setViewTaskDetails={setViewTaskDetails} task={task} setTask={setTask} setMode={setMode} setTaskToedit={setTaskToedit} setShowForm={setShowForm} />
                     </div>
 
                     <div className="motivation-container">
