@@ -11,12 +11,14 @@ import {
 import { useContext, useState } from "react";
 import MilestoneCard from "./MilestoneCard";
 import GoalEdit from "./GoalEdit";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GoalContext } from "../../../context/GoalContext";
 import { icons } from "./goalIcon";
 import AddMilestoneForm from "./AddMileStone";
 import { MileStoneDataContext } from "../../../context/MileStoneContext";
 import GoalCompletionRate from "./GoalCompletionRate";
+import axios from "axios";
+import { getToken } from "../../../utils/auth";
 
 
 function GoalDetails() {
@@ -24,8 +26,8 @@ function GoalDetails() {
     const [showMileStoneForm, setShowMileStoneForm] = useState(false);
     const [showGoalEdit, setShowGoalEdit] = useState(false);
     const { id } = useParams();
-    const { goalList } = useContext(GoalContext);
-
+    const { goalList, setGoalList } = useContext(GoalContext);
+    const navigate = useNavigate();
     const goal = goalList?.find((item) => item?.goal?.id === Number(id))
 
 
@@ -40,6 +42,34 @@ function GoalDetails() {
     const iconObject = icons.find((i) => (i?.name === goal?.goal?.icon));
 
     const Icon = iconObject.icon;
+
+    async function handleGoalDelete(e){
+        e.preventDefault;
+        const token = getToken();
+        try {
+            const response = await axios.delete(`http://localhost:3000/app/goals/${id}`,
+                                                {
+                                                    headers:{
+                                                        Authorization : `Bearer ${token}`
+                                                    }
+                                                }
+                                                
+                                            )
+    
+            setGoalList((item) => item.filter((data) => data.goal.id !== Number(id)));
+            alert("Goal Deleted successfully");
+            navigate("/app/goals");
+            
+        } catch (error) {
+            if(error?.response?.status === 401){
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+
+            console.log(error.message);
+        }
+
+    }
 
     return (
         <>
@@ -98,7 +128,11 @@ function GoalDetails() {
 
                         <button className="delete-btn-container">
 
-                            <Trash2 className="delete-btn" size={20} />
+                            <Trash2 
+                                className="delete-btn" 
+                                size={20} 
+                                onClick={handleGoalDelete}
+                            />
 
                         </button>
 

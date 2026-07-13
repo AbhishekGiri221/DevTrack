@@ -22,7 +22,7 @@ function AddMilestoneForm({ onClose }) {
 
     
     async function handleMileStoneSubmit(e) {
-        e.preventDefault();c
+        e.preventDefault();
         try {
             const token = getToken();
     
