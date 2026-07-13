@@ -18,7 +18,6 @@ import { getToken } from './utils/auth'
 import axios from 'axios'
 import GoalProvider from './context/GoalContext'
 import GoalDetails from './pages/Optionpages/Goals/GoalDetails'
-import GoalCompletionRateProvider from './context/GoalCompleteRateContext'
 import MileStoneContext from './context/MileStoneContext'
 
 function App() {
@@ -73,17 +72,16 @@ function App() {
         <Route path='/app' element={
           <ProtectedRoute>
             <GoalProvider>
-              <GoalCompletionRateProvider>
-                <Mainpage />
-                
-              </GoalCompletionRateProvider>
+              <MileStoneContext>
+                  <Mainpage />
+              </MileStoneContext>
             </GoalProvider>
           </ProtectedRoute>
         }>
           <Route index element={<Navigate to='/app/dashboard' />} />
           <Route path='dashboard' element={<Dashboard getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} setShowForm={setShowForm} showForm={showForm} task={task} setTask={setTask} filters={"All"} activeFilter={activeFilter} setMode={setMode} mode={mode} />} />
           <Route path='goals' element={<Goals />} />
-          <Route path='goals/:id' element={<MileStoneContext><GoalDetails /></MileStoneContext>} />
+          <Route path='goals/:id' element={<GoalDetails />} />
           <Route path='tasks' element={<Tasks getTask={getTask} taskToView={taskToView} setTaskToView={setTaskToView} viewTaskDetails={viewTaskDetails} setViewTaskDetails={setViewTaskDetails} taskToedit={taskToedit} setTaskToedit={setTaskToedit} mode={mode} setMode={setMode} setShowForm={setShowForm} showForm={showForm} task={task} setTask={setTask} filters={filters} setActiveFilter={setActiveFilter} activeFilter={activeFilter} />} />
           <Route path='notes' element={<Notes />} />
           <Route path='profile' element={<Profile />} />

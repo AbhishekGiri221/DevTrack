@@ -1,11 +1,12 @@
 import { FiX } from 'react-icons/fi';
 import './GoalForm.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import GoalIconPicker from './GoalIconPicker';
 import {getToken} from '../../../utils/auth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GoalStatusOption from './GoalStatusOption';
+import { GoalContext } from '../../../context/GoalContext';
 
 function GoalForm({goalStatus, setGoalList, onClose }) {
 
@@ -19,7 +20,7 @@ function GoalForm({goalStatus, setGoalList, onClose }) {
     })
 
     const navigate = useNavigate();
-
+    const {getGoals} = useContext(GoalContext)
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -33,8 +34,8 @@ function GoalForm({goalStatus, setGoalList, onClose }) {
                     }
                 }
             )
-            console.log(`the response is ${JSON.stringify(response.data)}`);
-            setGoalList(response.data);
+
+            await getGoals();
             onClose();
 
         } catch (error) {

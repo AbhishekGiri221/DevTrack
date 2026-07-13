@@ -156,21 +156,37 @@
 
 }
 
-.menu-btn {
+.delete-btn-container{
+    border: none;
+    background-color: white;
+}
 
-    width: 42px;
+.delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    height: 42px;
+    width: 36px;
+    height: 36px;
 
-    border-radius: 10px;
+    padding: 6px;
 
-    border: 1px solid #ddd;
-
-    background: white;
+    border-radius: 8px;
 
     cursor: pointer;
 
+    color: #6b7280;
+
+    transition: .2s;
 }
+.delete-btn:hover{
+    background: #FEE2E2;
+    color: #DC2626;
+
+    transform: scale(1.08);
+}
+
+
 
 /* PROGRESS */
 

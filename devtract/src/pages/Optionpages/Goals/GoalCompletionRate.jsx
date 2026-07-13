@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
-import './GoalCompletionRate.css';
-import { completionRateContext } from '../../../context/GoalCompleteRateContext';
 
-function GoalCompletionRate() {
-    const {progress} = useContext(completionRateContext);
-    
+import './GoalCompletionRate.css';
+
+function GoalCompletionRate({progress}) {
+    console.log(`the progress prop is : ${progress}`);
+
+
     return (
         <>
             <div className="completion-progress-container">

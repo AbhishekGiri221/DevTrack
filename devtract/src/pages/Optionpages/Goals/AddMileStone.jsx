@@ -3,12 +3,15 @@ import { getToken } from "../../../utils/auth";
 import "./AddMileStone.css";
 import { FiX, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MileStoneDataContext } from "../../../context/MileStoneContext";
+import { GoalContext } from "../../../context/GoalContext";
 
 function AddMilestoneForm({ onClose }) {
 
     const { id } = useParams();
-
+    const {milestoneData, setMilestoneData} = useContext(MileStoneDataContext);
+    const {getGoals} = useContext(GoalContext)
     const [mileStoneFormData, setMileStoneFormData] = useState({
         title: "",
         description: "",
@@ -17,10 +20,10 @@ function AddMilestoneForm({ onClose }) {
         status: ""
     });
 
-    try {
-        
-        async function handleMileStoneSubmit(e) {
-            e.preventDefault();
+    
+    async function handleMileStoneSubmit(e) {
+        e.preventDefault();c
+        try {
             const token = getToken();
     
             const response = await axios.post(
@@ -33,12 +36,15 @@ function AddMilestoneForm({ onClose }) {
                 }
     
             )
-
-            console.log(response.data);
+            onClose();
+            console.log("this is after submission : ", JSON.stringify(response.data));
+            setMilestoneData(response.data);
+            await getGoals();
+        } catch (error) {
+            console.log(error.message);
         }
-    } catch (error) {
-        console.log(error.message);
     }
+
     function handleChange(e) {
         const createMileStone = {
             ...mileStoneFormData, [e.target.name]: e.target.value

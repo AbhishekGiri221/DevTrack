@@ -4,11 +4,35 @@ import {
     ArrowLeft,
     Calendar,
     Save,
-    Plus
+    Plus,
+    ArrowUpAZ
 } from "lucide-react";
 
-function GoalEdit({onClose}) {
+import { icons } from "./goalIcon";
+import { useContext, useState } from "react";
+import { GoalContext } from "../../../context/GoalContext";
 
+function GoalEdit({ goal, onClose }) {
+    const { updateGoals } = useContext(GoalContext);
+
+    const [formData, setFormData] = useState({
+        id : goal.id,
+        icon: goal.icon,
+        title: goal.title,
+        description: goal.description,
+        duedate: goal.duedate,
+        status: goal.status,
+        priority: goal.priority
+    })
+    function handleChange(e) {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await updateGoals(formData);
+        onClose();
+    }
     return (
 
         <div className="goal-edit-page">
@@ -18,223 +42,152 @@ function GoalEdit({onClose}) {
             <div className="edit-header">
 
                 <button className="back-button" onClick={onClose}>
-                    <ArrowLeft size={20}/>
+                    <ArrowLeft size={20} />
                 </button>
 
                 <h1>Edit Goal</h1>
-
-                <button className="save-header-btn">
-                    <Save size={18}/>
-                    Save
-                </button>
 
             </div>
 
 
             {/* Form */}
-
-            <div className="goal-edit-form">
-
-                <div className="form-group">
-
-                    <label>Goal Title</label>
-
-                    <input
-                        type="text"
-                        value="Become React Developer"
-                    />
-
-                </div>
-
-                <div className="form-group">
-
-                    <label>Description</label>
-
-                    <textarea
-                        rows="5"
-                        defaultValue="Master React and build amazing projects."
-                    />
-
-                </div>
-
-                <div className="form-row">
+            <form onSubmit={handleSubmit}>
+                <div className="goal-edit-form">
 
                     <div className="form-group">
 
-                        <label>Priority</label>
+                        <label>Goal Title</label>
 
-                        <select>
-
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-
-                        </select>
+                        <input
+                            name="title"
+                            type="text"
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
 
                     </div>
 
                     <div className="form-group">
 
-                        <label>Status</label>
+                        <label>Description</label>
 
-                        <select>
-
-                            <option>In Progress</option>
-                            <option>Completed</option>
-                            <option>Pending</option>
-                            <option>Hold</option>
-
-                        </select>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                        />
 
                     </div>
 
-                </div>
+                    <div className="form-row">
 
-                <div className="form-row">
+                        <div className="form-group">
 
-                    <div className="form-group">
+                            <label>Priority</label>
 
-                        <label>Target Date</label>
+                            <select
+                                name="priority"
+                                value={formData.priority}
+                                onChange={handleChange}
+                            >
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
 
-                        <div className="date-input">
+                            </select>
 
-                            <Calendar size={18}/>
+                        </div>
 
-                            <input
-                                type="date"
-                                value="2026-12-31"
-                            />
+                        <div className="form-group">
+
+                            <label>Status</label>
+
+                            <select
+                                name="status"
+                                value={formData.status}
+                                onChange={handleChange}
+                            >
+
+                                <option value="inprogress">inprogress</option>
+                                <option value="completed">completed</option>
+                                <option value="pending">pending</option>
+
+                            </select>
 
                         </div>
 
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-row">
 
-                        <label>Goal Icon</label>
+                        <div className="form-group">
 
-                        <select>
+                            <label>Target Date</label>
 
-                            <option>⚛️ React</option>
-                            <option>💻 Coding</option>
-                            <option>📚 Study</option>
-                            <option>🏋️ Fitness</option>
+                            <div className="date-input">
 
-                        </select>
+                                <Calendar size={18} />
+
+                                <input
+                                    type="date"
+                                    name="duedate"
+                                    value={formData.duedate}
+                                    onChange={handleChange}
+                                />
+
+                            </div>
+
+                        </div>
+
+                        <div className="form-group">
+
+                            <label>Goal Icon</label>
+
+                            <select
+                                name="icon"
+                                value={formData.icon}
+                                onChange={handleChange}
+                            >
+
+                                {
+                                    icons.map((icon) => (
+                                        <option key={icon.id} value={icon.name}>{icon.name}</option>
+                                    ))
+                                }
+
+                            </select>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
 
+                {/* Footer */}
 
-            {/* Progress */}
+                <div className="footer-buttons">
 
-            {/* <div className="progress-card">
+                    <button
+                        className="cancel-btn"
+                        onClick={onClose}
+                        type="button"
+                    >
+                        Cancel
+                    </button>
 
-                <div className="progress-top">
+                    <button className="save-btn" type="submit">
 
-                    <h2>Goal Progress</h2>
+                        <Save size={18} />
 
-                    <span>42%</span>
-
-                </div>
-
-                <div className="progress-track">
-
-                    <div
-                        className="progress-fill"
-                        style={{width:"42%"}}
-                    />
-
-                </div>
-
-                <p>2 of 5 milestones completed</p>
-
-            </div> */}
-
-
-            {/* Milestones */}
-
-            {/* <div className="milestone-section">
-
-                <div className="milestone-header">
-
-                    <h2>Milestones</h2>
-
-                    <button>
-
-                        <Plus size={18}/>
-
-                        Add Milestone
+                        Save Changes
 
                     </button>
 
                 </div>
-
-                <div className="milestone-item">
-
-                    <span>Learn JavaScript Fundamentals</span>
-
-                    <span className="completed">Completed</span>
-
-                </div>
-
-                <div className="milestone-item">
-
-                    <span>Learn React Basics</span>
-
-                    <span className="completed">Completed</span>
-
-                </div>
-
-                <div className="milestone-item">
-
-                    <span>Build 3 Projects</span>
-
-                    <span className="progress-status">60%</span>
-
-                </div>
-
-                <div className="milestone-item">
-
-                    <span>Learn Redux</span>
-
-                    <span className="pending">Not Started</span>
-
-                </div>
-
-                <div className="milestone-item">
-
-                    <span>Deploy Portfolio</span>
-
-                    <span className="pending">Not Started</span>
-
-                </div>
-
-            </div> */}
-
-
-            {/* Footer */}
-
-            <div className="footer-buttons">
-
-                <button className="cancel-btn">
-                    Cancel
-                </button>
-
-                <button className="save-btn">
-
-                    <Save size={18}/>
-
-                    Save Changes
-
-                </button>
-
-            </div>
-
+            </form>
         </div>
+
 
     )
 

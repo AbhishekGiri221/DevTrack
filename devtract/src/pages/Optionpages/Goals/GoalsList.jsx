@@ -1,25 +1,26 @@
-import { FaReact } from 'react-icons/fa';
+
 import './GoalsList.css';
 import { icons } from './goalIcon';
-import { Pencil } from 'lucide-react';
-import { FiTrash2 } from 'react-icons/fi';
 import { useContext, useState } from 'react';
 import { GoalContext } from '../../../context/GoalContext';
 import GoalCompletionRate from './GoalCompletionRate';
 import { useNavigate } from 'react-router-dom';
 function GoalsList() {
     const { goalList } = useContext(GoalContext);
+
     const navigate = useNavigate();
     // const date = new Date().toISOString().split("T")[0];
     return (
         <>
             <div className="goal-list-container">
                 {
-                    goalList?.map((goal) => {
-                        // console.log(`the goal I am getting is : ${JSON.stringify(goal)}`);
+                    goalList?.map((item) => {
+                        const goal = item.goal;
+                        console.log(`the gaol is ${goal}`);
                         const iconData = icons.find((item) => item.name === goal.icon);
+                        
                         const Icon = iconData?.icon;
-                        // console.log(`icon after comparison is : ${Icon}`);
+
                         return (
                             <div id={goal.id} className="goal-list">
                                 <div className="list-left-section">
@@ -49,12 +50,10 @@ function GoalsList() {
                                 </div>
 
                                 <div className="goal-completion-rate">
-                                    <GoalCompletionRate />
-                                    <div className="goal-action-buttons">
-                                        {/* <Pencil className="edit-goal-button" size={40} />
-                                        <FiTrash2 className="delete-goal-button" size={40} /> */}
 
-                                        {/* <p onClick={()=> navigate(`${goal.id}`)}>{`>`}</p> */}
+                                    <GoalCompletionRate progress={item.progress}/>
+
+                                    <div className="goal-action-buttons">
                                         <p onClick={()=> navigate(`/app/goals/${goal.id}`)}>{`>`}</p>
                                     </div>
                                 </div>

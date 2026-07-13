@@ -5,7 +5,8 @@ import {
     Calendar,
     Pencil,
     MoreVertical,
-    Plus
+    Plus,
+    Trash2
 } from "lucide-react";
 import { useContext, useState } from "react";
 import MilestoneCard from "./MilestoneCard";
@@ -13,10 +14,9 @@ import GoalEdit from "./GoalEdit";
 import { useParams } from "react-router-dom";
 import { GoalContext } from "../../../context/GoalContext";
 import { icons } from "./goalIcon";
-import GoalCompletionRate from "./GoalCompletionRate";
-import { completionRateContext } from "../../../context/GoalCompleteRateContext";
 import AddMilestoneForm from "./AddMileStone";
 import { MileStoneDataContext } from "../../../context/MileStoneContext";
+import GoalCompletionRate from "./GoalCompletionRate";
 
 
 function GoalDetails() {
@@ -25,17 +25,19 @@ function GoalDetails() {
     const [showGoalEdit, setShowGoalEdit] = useState(false);
     const { id } = useParams();
     const { goalList } = useContext(GoalContext);
-    const goal = goalList?.find((g) => g?.id === Number(id))
 
-    const { progress } = useContext(completionRateContext);
+    const goal = goalList?.find((item) => item?.goal?.id === Number(id))
 
-    const {milestoneData} = useContext(MileStoneDataContext);
+
+    const { milestoneData } = useContext(MileStoneDataContext)
+
+
 
     if (!goal) {
         return <h2>Loading ...</h2>
     }
 
-    const iconObject = icons.find((i) => (i?.name === goal?.icon));
+    const iconObject = icons.find((i) => (i?.name === goal?.goal?.icon));
 
     const Icon = iconObject.icon;
 
@@ -60,23 +62,23 @@ function GoalDetails() {
 
                             <div className="goal-title-row">
 
-                                <h1>{goal.title}</h1>
+                                <h1>{goal.goal.title}</h1>
 
                                 <span className="priority-badge">
-                                    {goal.priority}
+                                    {goal.goal.priority}
                                 </span>
 
                             </div>
 
                             <p>
-                                {goal.description}
+                                {goal.goal.description}
                             </p>
 
                             <div className="goal-date">
 
                                 <Calendar size={16} />
 
-                                Target : {goal.duedate}
+                                Target : {goal.goal.duedate}
 
                             </div>
 
@@ -94,9 +96,9 @@ function GoalDetails() {
 
                         </button>
 
-                        <button className="menu-btn">
+                        <button className="delete-btn-container">
 
-                            <MoreVertical size={20} />
+                            <Trash2 className="delete-btn" size={20} />
 
                         </button>
 
@@ -112,16 +114,16 @@ function GoalDetails() {
                     <div className="progress-text">
 
                         <span>
-                            <strong>{progress}%</strong> Complete
+                            <strong>{goal.progress}%</strong> Complete
                         </span>
 
                         <span>
-                            2 / 5 Milestones  add you custom here
+                            {/* {completedMilestone.length} / {milestoneData.length} Milestones completed  */}
                         </span>
 
                     </div>
 
-                    <GoalCompletionRate />
+                    <GoalCompletionRate progress={goal.progress} />
 
                 </div>
 
@@ -160,18 +162,19 @@ function GoalDetails() {
 
             </div>
             {
-                showGoalEdit && <div className="goaleditform-overlay"> 
-                    <GoalEdit 
-                        onClose={() => setShowGoalEdit(false)} 
-                    /> 
+                showGoalEdit && <div className="goaleditform-overlay">
+                    <GoalEdit
+                        goal={goal.goal}
+                        onClose={() => setShowGoalEdit(false)}
+                    />
                 </div>
             }
 
             {
-                showMileStoneForm && 
-                    <AddMilestoneForm
-                        onClose={() => setShowMileStoneForm(false)}
-                    />
+                showMileStoneForm &&
+                <AddMilestoneForm
+                    onClose={() => setShowMileStoneForm(false)}
+                />
             }
         </>
     )

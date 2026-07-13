@@ -5,38 +5,63 @@ import { getToken } from "../utils/auth";
 
 export const GoalContext = createContext();
 
-function GoalProvider({children}) {
+function GoalProvider({ children }) {
 
-    const [goalList,setGoalList] = useState([]);
+    const [goalList, setGoalList] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function getGoals() {
-            
+        getGoals();
+    }, [navigate]);
+
+    async function getGoals() {
+
+        const token = getToken();
+        try {
+            const response = await axios.get("http://localhost:3000/app/goals", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            setGoalList(response.data);
+
+        } catch (error) {
+            if (error?.response?.status === 401) {
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+
+            console.log(error);
+        }
+    }
+
+
+
+    async function updateGoals(formData) {
+        try {
             const token = getToken();
-            try {
-                const response = await axios.get("http://localhost:3000/app/goals", {
+
+            const response = await axios.patch(`http://localhost:3000/app/goals/${formData.id}`, formData,
+                {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                })
-    
-                setGoalList(response.data);
-            } catch (error) {
-                if (error?.response?.status === 401) {
-                    localStorage.removeItem("token");
-                    navigate("/login");
                 }
-    
-                console.log(error);
-            }
-        }
-    getGoals();
-    }, [navigate]);
+            );
 
-    return(
+            console.log("after update is " ,JSON.stringify(response.data.goal));
+
+            setGoalList(prev => prev.map((item) => item.goal.id === response.data.goal.id ? response.data : item));
+            
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    return (
         <GoalContext.Provider
-            value={{goalList, setGoalList}}
+            value={{ goalList, setGoalList, updateGoals, getGoals }}
         >
             {children}
         </GoalContext.Provider>

@@ -211,39 +211,6 @@
     gap: 10px;
 }
 
-/* .edit-goal-button,
-.delete-goal-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 36px;
-    height: 36px;
-
-    padding: 6px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    color: #6b7280;
-
-    transition: .2s;
-}
-
-.edit-goal-button:hover {
-    background: #EEF2FF;
-    color: #4F46E5;
-
-    transform: scale(1.08);
-}
-
-.delete-goal-button:hover {
-    background: #FEE2E2;
-    color: #DC2626;
-
-    transform: scale(1.08);
-} */
 
 
 .goal-action-buttons {
