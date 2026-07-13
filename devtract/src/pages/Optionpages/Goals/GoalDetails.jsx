@@ -33,7 +33,9 @@ function GoalDetails() {
 
     const { milestoneData } = useContext(MileStoneDataContext)
 
+    const completedMilestone = milestoneData.filter((item) => item.status === "completed");
 
+    const [expandedId, setExpandedId] = useState(null);
 
     if (!goal) {
         return <h2>Loading ...</h2>
@@ -147,12 +149,12 @@ function GoalDetails() {
 
                     <div className="progress-text">
 
-                        <span>
+                        {/* <span>
                             <strong>{goal.progress}%</strong> Complete
-                        </span>
+                        </span> */}
 
                         <span>
-                            {/* {completedMilestone.length} / {milestoneData.length} Milestones completed  */}
+                            {completedMilestone.length} / {milestoneData.length} Milestones completed 
                         </span>
 
                     </div>
@@ -187,6 +189,10 @@ function GoalDetails() {
                             <MilestoneCard
                                 key={item.id}
                                 milestone={item}
+                                expanded = {expandedId === item.id}
+                                onToggle= {
+                                    ()=> setExpandedId(prev => prev === item.id ? null : item.id)
+                                }
                             />
                         ))
                     }

@@ -17,7 +17,7 @@ function AddMilestoneForm({ onClose }) {
         description: "",
         duedate: "",
         priority: "",
-        status: ""
+        status: "",
     });
 
     
@@ -37,7 +37,6 @@ function AddMilestoneForm({ onClose }) {
     
             )
             onClose();
-            console.log("this is after submission : ", JSON.stringify(response.data));
             setMilestoneData(response.data);
             await getGoals();
         } catch (error) {

@@ -7,9 +7,9 @@ import { GoalContext } from '../../../context/GoalContext';
 function GoalDashboardCard() {
     const {goalList} = useContext(GoalContext);
     function activeGoalLength() {
-        console.log("the goal list is :  ", goalList);
+
         const active = goalList?.filter((item)=> item.goal.status === "inprogress")
-        console.log("the goal active is :  ", active);
+
 
         return active?.length;
     }

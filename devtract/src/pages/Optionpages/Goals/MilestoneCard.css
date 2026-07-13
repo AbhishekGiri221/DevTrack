@@ -119,10 +119,9 @@
     cursor:pointer;
 
 }
-
 .subtask-list{
 
-    margin-top:20px;
+    margin-top:22px;
 
     margin-left:42px;
 
@@ -131,6 +130,13 @@
     flex-direction:column;
 
     gap:14px;
+
+    border-top:1px solid #ECECEC;
+
+    padding-top:20px;
+
+        transition: all 1s ease-in;
+
 
 }
 
@@ -141,6 +147,10 @@
     align-items:center;
 
     gap:12px;
+
+    font-size:15px;
+
+    color:#374151;
 
 }
 
@@ -153,5 +163,52 @@
 .subtask-pending{
 
     color:#D1D5DB;
+
+}
+
+.expand-btn{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.add-task-btn{
+
+    margin-top:12px;
+
+    width:fit-content;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    border:1px solid #7C3AED;
+
+    background:white;
+
+    color:#7C3AED;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+
+}
+
+.add-task-btn:hover{
+
+    background:#7C3AED;
+
+    color:white;
 
 }

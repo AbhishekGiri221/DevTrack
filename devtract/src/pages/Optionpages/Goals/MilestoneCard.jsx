@@ -1,3 +1,4 @@
+import { BiDownArrow } from "react-icons/bi";
 import "./MilestoneCard.css";
 
 import {
@@ -5,14 +6,18 @@ import {
     Circle,
     ChevronUp,
     ChevronDown,
-    MoreVertical
+    Pencil,
 } from "lucide-react";
+import { useState } from "react";
+import AddSubTaskForm from "./AddSubTaskForm";
 
-function MilestoneCard({ milestone }) {
+function MilestoneCard({ milestone, expanded, onToggle }) {
+
+    const [showTaskForm, setShowTaskForm] = useState(false);
 
     return (
 
-        <div className="milestone-card">
+        <div className="milestone-card" >
 
             <div className="milestone-top">
 
@@ -74,26 +79,32 @@ function MilestoneCard({ milestone }) {
 
                     <button>
 
-                        <MoreVertical size={18}/>
+                        <Pencil size={18} />
 
                     </button>
 
-                    {
-                        milestone.expanded &&
-                        <ChevronUp size={18}/>
-                    }
+
+                    <button
+                        className="expand-btn"
+                        onClick={onToggle}
+                    >
+                        {
+                            expanded
+                                ? <ChevronUp size={22} />
+                                : <ChevronDown size={22} />
+                        }
+                    </button>
 
                 </div>
 
             </div>
 
             {
-                milestone.expanded &&
-
-                <div className="subtask-list">
-
-                    {
-                        milestone.tasks.map(task=>(
+                expanded && (
+                    <div className="subtask-list"> 
+                    {console.log(milestone)}
+                        {(milestone?.tasks)?.map(task => (
+                
                             <div
                                 key={task.id}
                                 className="subtask"
@@ -113,16 +124,20 @@ function MilestoneCard({ milestone }) {
                                         />
                                 }
 
-                                <span>
-                                    {task.title}
-                                </span>
-
+                                <span>{task.title}</span>
                             </div>
-                        ))
-                    }
 
-                </div>
+                        ))}
 
+                        <button className="add-task-btn" onClick={() => setShowTaskForm(true)}>
+                            + Add Task
+                        </button>
+
+                    </div>
+                )
+            }
+            {
+                showTaskForm && <AddSubTaskForm milestoneId = {milestone.id} onClose = {() => setShowTaskForm(false)}/>
             }
 
         </div>

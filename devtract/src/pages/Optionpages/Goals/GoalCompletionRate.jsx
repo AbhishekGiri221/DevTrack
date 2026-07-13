@@ -2,8 +2,6 @@
 import './GoalCompletionRate.css';
 
 function GoalCompletionRate({progress}) {
-    console.log(`the progress prop is : ${progress}`);
-
 
     return (
         <>
