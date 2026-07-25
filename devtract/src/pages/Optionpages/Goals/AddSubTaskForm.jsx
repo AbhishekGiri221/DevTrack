@@ -5,16 +5,18 @@ import { getToken } from "../../../utils/auth";
 import { useParams } from "react-router-dom";
 import { MileStoneDataContext } from "../../../context/MileStoneContext";
 import axios from "axios";
+import { GoalContext } from "../../../context/GoalContext";
 
-function AddSubTaskForm({ milestoneId, onClose }) {
-
+function AddSubTaskForm({mode, milestone, milestoneId, onClose }) {
+    console.log(`the milestone id is ${milestoneId}`);
     const { setMilestoneData } = useContext(MileStoneDataContext);
+    const {getGoals} = useContext(GoalContext);
 
     const [taskData, setTaskData] = useState({
-        title: "",
-        description: "",
-        priority: "medium",
-        status: "pending"
+        title: milestone?.title || "",
+        description: milestone?.description || "",
+        priority: milestone?.priority || "low",
+        status: milestone?.status || "pending"
     });
 
     function handleChange(e) {
@@ -24,35 +26,63 @@ function AddSubTaskForm({ milestoneId, onClose }) {
         }));
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+async function handleSubmit(e) {
+    e.preventDefault();
 
-        const token = getToken();
-        console.log(taskData);
+    const token = getToken();
 
-        try {
-
-
-            const response = await axios.post(`http://localhost:3000/app/goals/mileStone/${milestoneId}`,
-                taskData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+    try {
+        const response = await axios.post(
+            `http://localhost:3000/app/goals/milestone/${milestoneId}`,
+            taskData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
+            }
+        );
+
+        setMilestoneData(prev =>
+            prev.map(item =>
+                item.id === response.data.id ? response.data : item
             )
+        );
 
-            console.log(`the response is ${JSON.stringify(response.data)}`);
-            setMilestoneData(prev =>
-                prev.map(item =>
-                    item.id === response.data.id ? response.data : item
-                )
-            ); onClose();
-
-        } catch (error) {
-            console.log(error.message);
-        }
+        onClose();
+    } catch (error) {
+        console.log(error.response?.data || error.message);
     }
+}
+
+async function handleUpdate(e) {
+    e.preventDefault();
+
+    const token = getToken();
+
+    try {
+        const response = await axios.patch(
+            `http://localhost:3000/app/goals/milestone/${milestone.id}`,
+            taskData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        getGoals();
+        setMilestoneData(prev =>
+            prev.map(item =>
+                item.id === response.data.id ? response.data : item
+            )
+        );
+
+        alert("Updated");
+        onClose();
+
+    } catch (error) {
+        console.log(error.response?.data || error.message);
+    }
+}
 
     return (
         <div className="task-overlay">
@@ -73,7 +103,7 @@ function AddSubTaskForm({ milestoneId, onClose }) {
 
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={mode === "edit" ? handleUpdate : handleSubmit}>
 
                     <div className="form-group">
 
@@ -154,7 +184,9 @@ function AddSubTaskForm({ milestoneId, onClose }) {
                             className="save-btn"
                             type="submit"
                         >
-                            Add Task
+                            {
+                                mode === "edit" ? `Update Task` : `Add Task`
+                            }
                         </button>
 
                     </div>

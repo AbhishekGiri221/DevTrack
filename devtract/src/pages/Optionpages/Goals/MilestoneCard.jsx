@@ -7,13 +7,87 @@ import {
     ChevronUp,
     ChevronDown,
     Pencil,
+    Trash2,
 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddSubTaskForm from "./AddSubTaskForm";
+import { getToken } from "../../../utils/auth";
+import axios from "axios";
+import { MileStoneDataContext } from "../../../context/MileStoneContext";
+import { GoalContext } from "../../../context/GoalContext";
+
+
+async function handleDelete(id, getMileStoneData, getGoals) {
+    const token = getToken();
+
+    try {
+        const response = await axios.delete(`http://localhost:3000/app/goals/milestone/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        await getMileStoneData();
+        await getGoals();
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+async function handleComplete(getMileStoneData, id, getGoals) {
+    const token = getToken();
+
+    try {
+
+        const response = await axios.patch(`http://localhost:3000/app/goals/milestone/status/${id}`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+
+        await getMileStoneData();
+        await getGoals();
+
+        alert("Marked all task as complete");
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+async function handleTaskCompletion(milestoneId, taskid, getMileStoneData, getGoals) {
+    const token = getToken();
+
+    try {
+
+        const response = await axios.patch(`http://localhost:3000/app/goals/milestone/tasks/status/${milestoneId}/${taskid}`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+
+        await getMileStoneData();
+        await getGoals();
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 function MilestoneCard({ milestone, expanded, onToggle }) {
 
+    const { getMileStoneData } = useContext(MileStoneDataContext);
+    const { getGoals } = useContext(GoalContext);
     const [showTaskForm, setShowTaskForm] = useState(false);
+    const [editTaskForm, setEditTaskForm] = useState(false);
 
     return (
 
@@ -24,16 +98,18 @@ function MilestoneCard({ milestone, expanded, onToggle }) {
                 <div className="milestone-left">
 
                     {
-                        milestone.status === "Completed"
+                        milestone.status === "completed"
                             ?
                             <CheckCircle2
                                 className="done-icon"
                                 size={24}
+                                onClick={() => handleComplete(getMileStoneData, milestone.id , getGoals)}
                             />
                             :
                             <Circle
                                 className="pending-icon"
                                 size={24}
+                                onClick={() => handleComplete(getMileStoneData, milestone.id , getGoals)}
                             />
                     }
 
@@ -54,9 +130,7 @@ function MilestoneCard({ milestone, expanded, onToggle }) {
                 <div className="milestone-right">
 
                     <span
-                        className={`status ${milestone.status
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}`}
+                        className={`status ${milestone.status}`}
                     >
 
                         {milestone.status}
@@ -77,9 +151,19 @@ function MilestoneCard({ milestone, expanded, onToggle }) {
                         </span>
                     }
 
-                    <button>
+                    <button className="subtask-edit-btn" onClick={() => setEditTaskForm(true)}>
 
-                        <Pencil size={18} />
+                        <Pencil size={20} />
+
+                    </button>
+
+                    <button className="delete-btn-container">
+
+                        <Trash2
+                            className="delete-btn"
+                            size={20}
+                            onClick={() => handleDelete(milestone.id, getMileStoneData, getGoals)}
+                        />
 
                     </button>
 
@@ -101,27 +185,30 @@ function MilestoneCard({ milestone, expanded, onToggle }) {
 
             {
                 expanded && (
-                    <div className="subtask-list"> 
-                    {console.log(milestone)}
+                    <div className="subtask-list">
                         {(milestone?.tasks)?.map(task => (
-                
+
                             <div
                                 key={task.id}
                                 className="subtask"
                             >
 
                                 {
-                                    task.completed
-                                        ?
-                                        <CheckCircle2
-                                            size={18}
-                                            className="subtask-done"
-                                        />
-                                        :
-                                        <Circle
-                                            size={18}
-                                            className="subtask-pending"
-                                        />
+                                    (task.status === "completed" || milestone.status === "completed")
+                                        ? (
+                                            <CheckCircle2
+                                                size={18}
+                                                className="subtask-done"
+                                                onClick={() => handleTaskCompletion(milestone.id, task.id, getMileStoneData, getGoals)}
+                                            />
+                                        )
+                                        : (
+                                            <Circle
+                                                size={18}
+                                                className="subtask-pending"
+                                                onClick={() => handleTaskCompletion(milestone.id, task.id, getMileStoneData, getGoals)}
+                                            />
+                                        )
                                 }
 
                                 <span>{task.title}</span>
@@ -137,7 +224,11 @@ function MilestoneCard({ milestone, expanded, onToggle }) {
                 )
             }
             {
-                showTaskForm && <AddSubTaskForm milestoneId = {milestone.id} onClose = {() => setShowTaskForm(false)}/>
+                showTaskForm && <AddSubTaskForm milestoneId={milestone.id} onClose={() => setShowTaskForm(false)} />
+            }
+
+            {
+                editTaskForm && <AddSubTaskForm mode="edit" milestone={milestone} onClose={() => setEditTaskForm(false)} />
             }
 
         </div>

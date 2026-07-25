@@ -44,7 +44,6 @@ function App() {
           }
         }
       );
-      console.log(temporaryTask.data);
       setTask(temporaryTask.data);
 
     } catch (error) {
@@ -52,7 +51,7 @@ function App() {
         localStorage.removeItem("token");
         navigate("/login");
       }
-      alert(`it is in App ${error?.response?.status}`);
+      console.log(error?.response?.message);
 
     }
 

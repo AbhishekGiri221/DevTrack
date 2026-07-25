@@ -26,8 +26,7 @@ function MileStoneContext({children}) {
                 }
             )
     
-            setMilestoneData(response.data);
-
+            setMilestoneData((prev) => ( prev.id === response.data.id ? response.data : prev));
         } catch (error) {
             if(error?.response?.status === 401){
                 localStorage.removeItem("token");
@@ -39,7 +38,7 @@ function MileStoneContext({children}) {
 
     }
     return (
-        <MileStoneDataContext.Provider value={{milestoneData, setMilestoneData}}>
+        <MileStoneDataContext.Provider value={{getMileStoneData, milestoneData, setMilestoneData}}>
             {children}
         </MileStoneDataContext.Provider>
     )

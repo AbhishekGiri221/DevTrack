@@ -2,63 +2,105 @@ import { FiX } from 'react-icons/fi';
 import './GoalForm.css';
 import { useContext, useState } from 'react';
 import GoalIconPicker from './GoalIconPicker';
-import {getToken} from '../../../utils/auth';
+import { getToken } from '../../../utils/auth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GoalStatusOption from './GoalStatusOption';
 import { GoalContext } from '../../../context/GoalContext';
 
-function GoalForm({goalStatus, setGoalList, onClose }) {
+function GoalForm({ goalStatus, setGoalList, onClose }) {
 
-    const[goalFormData, setGoalFormData] = useState({
-        selectedIcon:"",
-        goalTitle:"",
-        goalDescription:"",
-        targetDate:"",
-        currentStatus:"inprogress",
-        goalPriority:"Medium",
-    })
+    const [goalFormData, setGoalFormData] = useState({
+        selectedIcon: "",
+        goalTitle: "",
+        goalDescription: "",
+        targetDate: "",
+        currentStatus: "inprogress",
+        goalPriority: "Medium",
+    });
 
     const navigate = useNavigate();
-    const {getGoals} = useContext(GoalContext)
+    const { getGoals } = useContext(GoalContext);
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
+
+        const errors = [];
+
+        if (!goalFormData.selectedIcon) {
+            errors.push("Please select an icon.");
+        }
+
+        if (!goalFormData.goalTitle.trim()) {
+            errors.push("Goal title is required.");
+        }
+
+        if (!goalFormData.goalDescription.trim()) {
+            errors.push("Goal description is required.");
+        }
+
+        if (!goalFormData.targetDate) {
+            errors.push("Please select a target date.");
+        }
+
+        if (!goalFormData.currentStatus) {
+            errors.push("Please select a status.");
+        }
+
+        if (!goalFormData.goalPriority) {
+            errors.push("Please select a priority.");
+        }
+
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+            return;
+        }
+
         const token = getToken();
+
         try {
-            const response = await axios.post("http://localhost:3000/app/goals",
+            await axios.post(
+                "http://localhost:3000/app/goals",
                 goalFormData,
                 {
-                    headers:{
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
-            )
+            );
 
             await getGoals();
             onClose();
 
         } catch (error) {
-            if(error?.response?.status === 401){
+            if (error?.response?.status === 401) {
                 localStorage.removeItem("token");
                 navigate("/login");
             }
+
             alert(error?.message);
-        }   
+        }
     }
 
-    function handleValue(e){
-        setGoalFormData((prev)=> ({...prev, [e.target.name] : e.target.value}));
+    function handleValue(e) {
+        setGoalFormData((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
     }
+
     return (
         <>
             <div className="overlay-layer">
                 <div className='goal-input-form flex-property'>
+
                     <div className="goal-form-heading">
+
                         <div className="left-head-section field-gap">
                             <h2>Add New Goal</h2>
                             <span>Define your goal and break it down</span>
                         </div>
+
                         <div className="right-head-section">
                             <FiX
                                 className='cancelButton'
@@ -66,37 +108,56 @@ function GoalForm({goalStatus, setGoalList, onClose }) {
                                 onClick={onClose}
                             />
                         </div>
+
                     </div>
-                    <div className="form-container flex-property" >
+
+                    <div className="form-container flex-property">
+
                         <form className="goal-form flex-property" onSubmit={handleSubmit}>
+
                             <div className="goal-logo">
+
                                 <span>Select Icon</span>
 
                                 <GoalIconPicker
                                     selectedIcon={goalFormData.selectedIcon}
-                                    setSelectedIcon={(value)=> setGoalFormData((prev)=> ({...prev, selectedIcon : value}))}
-                                />                            </div>
-                            <div className="goal-title flex-property field-gap">
-                                <span>Goal title</span>
-                                <input
-                                    name='goalTitle'
-                                    type='text'
-                                    value={goalFormData.goalTitle}
-                                    placeholder='Enter your goal'
-                                    onChange={handleValue}
-                                    className='goal-title-input-field'
+                                    setSelectedIcon={(value) =>
+                                        setGoalFormData((prev) => ({
+                                            ...prev,
+                                            selectedIcon: value
+                                        }))
+                                    }
                                 />
+
                             </div>
 
-                            <div className="goal-description flex-property field-gap ">
+                            <div className="goal-title flex-property field-gap">
+
+                                <span>Goal title</span>
+
+                                <input
+                                    name="goalTitle"
+                                    type="text"
+                                    value={goalFormData.goalTitle}
+                                    placeholder="Enter your goal"
+                                    onChange={handleValue}
+                                    className="goal-title-input-field"
+                                />
+
+                            </div>
+
+                            <div className="goal-description flex-property field-gap">
+
                                 <span>Description</span>
+
                                 <textarea
-                                    name='goalDescription'
-                                    placeholder='Describe your goal'
+                                    name="goalDescription"
+                                    placeholder="Describe your goal"
                                     value={goalFormData.goalDescription}
                                     onChange={handleValue}
-                                    className='goal-description-input-field'
+                                    className="goal-description-input-field"
                                 />
+
                             </div>
 
                             <div className="goal-date-prority-container">
@@ -104,49 +165,76 @@ function GoalForm({goalStatus, setGoalList, onClose }) {
                                 <div className="goal-target-date flex-property field-gap">
 
                                     <span>Target Date</span>
+
                                     <input
-                                        name='targetDate'
+                                        name="targetDate"
                                         type="date"
                                         min={new Date().toISOString().split("T")[0]}
                                         value={goalFormData.targetDate}
                                         onChange={handleValue}
-                                        className='target-date-input-field'
+                                        className="target-date-input-field"
                                     />
+
                                 </div>
 
-                                <div className='goal-status flex-property field-gap'>
+                                <div className="goal-status flex-property field-gap">
+
                                     <span>Status</span>
-                                    <GoalStatusOption goalFormData={goalFormData} setGoalFormData={setGoalFormData} goalStatus={goalStatus}/>
+
+                                    <GoalStatusOption
+                                        goalFormData={goalFormData}
+                                        setGoalFormData={setGoalFormData}
+                                        goalStatus={goalStatus}
+                                    />
+
                                 </div>
 
                                 <div className="priority-cotainer flex-property field-gap">
+
                                     <span>Priority</span>
+
                                     <select
-                                        name='goalPriority'
+                                        name="goalPriority"
                                         value={goalFormData.goalPriority}
                                         onChange={handleValue}
-                                        className='goal-priority-field'
+                                        className="goal-priority-field"
                                     >
-                                        <option value={"Medium"}>Medium</option>
-                                        <option value={"High"}>High</option>
-                                        <option value={"Low"}>Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Low">Low</option>
                                     </select>
+
                                 </div>
+
                             </div>
 
                             <div className="goal-form-button-container">
-                                <button type='button' className='cancel-goal-button'>Cancel</button>
-                                <button className='add-goal-button'>Create Goal</button>
-                            </div>
-                        </form>
-                    </div>
 
+                                <button
+                                    type="button"
+                                    className="cancel-goal-button"
+                                    onClick={onClose}
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    className="add-goal-button"
+                                >
+                                    Create Goal
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
 
                 </div>
             </div>
-
         </>
-    )
+    );
 }
 
 export default GoalForm;

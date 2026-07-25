@@ -1,214 +1,250 @@
-.milestone-card{
+.milestone-card {
 
-    background:white;
+    background: white;
 
-    border-radius:14px;
+    border-radius: 14px;
 
-    padding:20px 24px;
+    padding: 20px 24px;
 
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
-
-}
-
-.milestone-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .08);
 
 }
 
-.milestone-left{
+.milestone-top {
 
-    display:flex;
+    display: flex;
 
-    gap:16px;
+    justify-content: space-between;
 
-}
-
-.done-icon{
-
-    color:#22C55E;
+    align-items: flex-start;
 
 }
 
-.pending-icon{
+.milestone-left {
 
-    color:#D1D5DB;
+    display: flex;
 
-}
-
-.milestone-left h3{
-
-    margin:0;
-
-    font-size:18px;
+    gap: 16px;
 
 }
 
-.milestone-left p{
+.done-icon {
 
-    margin-top:6px;
-
-    color:#6B7280;
+    color: #22C55E;
 
 }
 
-.milestone-right{
+.pending-icon {
 
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
+    color: #D1D5DB;
 
 }
 
-.status{
+.milestone-left h3 {
 
-    padding:6px 12px;
+    margin: 0;
 
-    border-radius:20px;
-
-    font-size:12px;
-
-    font-weight:600;
+    font-size: 18px;
 
 }
 
-.status.completed{
+.milestone-left p {
 
-    background:#DCFCE7;
+    margin-top: 6px;
 
-    color:#15803D;
-
-}
-
-.status.in-progress{
-
-    background:#EDE9FE;
-
-    color:#6D28D9;
+    color: #6B7280;
 
 }
 
-.status.not-started{
+.milestone-right {
 
-    background:#F3F4F6;
+    display: flex;
 
-    color:#6B7280;
+    align-items: center;
 
-}
-
-.date{
-
-    color:#6B7280;
-
-    font-size:13px;
+    gap: 12px;
 
 }
 
-.milestone-right button{
+.status {
 
-    border:none;
+    padding: 6px 12px;
 
-    background:none;
+    border-radius: 20px;
 
-    cursor:pointer;
+    font-size: 12px;
 
-}
-.subtask-list{
-
-    margin-top:22px;
-
-    margin-left:42px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-    border-top:1px solid #ECECEC;
-
-    padding-top:20px;
-
-        transition: all 1s ease-in;
-
+    font-weight: 600;
 
 }
 
-.subtask{
+.status.completed {
 
-    display:flex;
+    background: #DCFCE7;
 
-    align-items:center;
-
-    gap:12px;
-
-    font-size:15px;
-
-    color:#374151;
+    color: #15803D;
 
 }
 
-.subtask-done{
+.status.inprogress {
 
-    color:#7C3AED;
+    background: #EDE9FE;
 
-}
-
-.subtask-pending{
-
-    color:#D1D5DB;
+    color: #6D28D9;
 
 }
 
-.expand-btn{
+.status.pending {
 
-    border:none;
+    background: #F3F4F6;
 
-    background:none;
-
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+    color: #6B7280;
 
 }
 
-.add-task-btn{
+.date {
 
-    margin-top:12px;
+    color: #6B7280;
 
-    width:fit-content;
+    font-size: 13px;
 
-    padding:10px 18px;
+}
 
-    border-radius:8px;
+.milestone-right button {
 
-    border:1px solid #7C3AED;
+    border: none;
 
-    background:white;
+    background: none;
 
-    color:#7C3AED;
+}
 
-    font-weight:600;
 
-    cursor:pointer;
+.subtask-list {
+
+    margin-top: 22px;
+
+    margin-left: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    border-top: 1px solid #ECECEC;
+
+    padding-top: 20px;
+
+    transition: all 1s ease-in;
 
 
 }
 
-.add-task-btn:hover{
+/* Edit Button */
 
-    background:#7C3AED;
+.subtask-edit-btn {
+    width: 42px;
+    height: 42px;
 
-    color:white;
+    border: none;
+    border-radius: 10px;
+
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    color: #64748B;
+
+    transition: all .25s ease;
+}
+
+.subtask-edit-btn:hover {
+    background: #EEF2FF;
+    color: #7C3AED;
+
+    transform: rotate(-8deg) scale(1.08);
+
+    box-shadow: 0 6px 14px rgba(124, 58, 237, .18);
+}
+
+.subtask-edit-btn:active {
+    transform: scale(.95);
+}
+
+
+.subtask {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 15px;
+
+    color: #374151;
+
+}
+
+.subtask-done {
+
+    color: #7C3AED;
+
+}
+
+.subtask-pending {
+
+    color: #D1D5DB;
+
+}
+
+.expand-btn {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+.add-task-btn {
+
+    margin-top: 12px;
+
+    width: fit-content;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    border: 1px solid #7C3AED;
+
+    background: white;
+
+    color: #7C3AED;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+
+}
+
+.add-task-btn:hover {
+
+    background: #7C3AED;
+
+    color: white;
 
 }

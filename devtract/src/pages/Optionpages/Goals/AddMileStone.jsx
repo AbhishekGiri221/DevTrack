@@ -10,18 +10,18 @@ import { GoalContext } from "../../../context/GoalContext";
 function AddMilestoneForm({ onClose }) {
 
     const { id } = useParams();
-    const {milestoneData, setMilestoneData} = useContext(MileStoneDataContext);
+    const {milestoneData, setMilestoneData, getMileStoneData} = useContext(MileStoneDataContext);
     const {getGoals} = useContext(GoalContext)
     const [mileStoneFormData, setMileStoneFormData] = useState({
         title: "",
         description: "",
         duedate: "",
-        priority: "",
-        status: "",
+        priority: "medium",
+        status: "pending",
     });
 
     
-    async function handleMileStoneSubmit(e) {
+    async function handleMileStoneSubmit(e,getMileStoneData) {
         e.preventDefault();
         try {
             const token = getToken();
@@ -36,9 +36,9 @@ function AddMilestoneForm({ onClose }) {
                 }
     
             )
-            onClose();
-            setMilestoneData(response.data);
+            await getMileStoneData();
             await getGoals();
+            onClose();
         } catch (error) {
             console.log(error.message);
         }
@@ -69,7 +69,7 @@ function AddMilestoneForm({ onClose }) {
 
                 </div>
 
-                <form onSubmit={handleMileStoneSubmit}>
+                <form onSubmit={(e) => handleMileStoneSubmit(e, getMileStoneData)}>
 
                     <div className="form-group">
 

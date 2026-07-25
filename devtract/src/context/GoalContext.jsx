@@ -8,6 +8,7 @@ export const GoalContext = createContext();
 function GoalProvider({ children }) {
 
     const [goalList, setGoalList] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,7 +51,6 @@ function GoalProvider({ children }) {
                 }
             );
 
-            console.log("after update is " ,JSON.stringify(response.data.goal));
 
             setGoalList(prev => prev.map((item) => item.goal.id === response.data.goal.id ? response.data : item));
             

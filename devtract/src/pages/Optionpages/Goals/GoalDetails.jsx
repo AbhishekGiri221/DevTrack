@@ -73,6 +73,10 @@ function GoalDetails() {
 
     }
 
+    function handleBack(){
+        navigate(-1);
+    }
+
     return (
         <>
 
@@ -83,7 +87,7 @@ function GoalDetails() {
                     <div className="goal-header-left">
 
                         <button className="back-btn">
-                            <ArrowLeft size={20} />
+                            <ArrowLeft size={20} onClick={handleBack}/>
                         </button>
 
                         <div className="goal-icon" style={{ background: iconObject.color }} >
