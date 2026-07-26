@@ -1,52 +1,11 @@
 import "./NotesCard.css";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Pencil, Trash2 } from "lucide-react";
+import useNoteslist from "../../../store/notesStore";
 
-const notes = [
-    {
-        id: 1,
-        title: "Business Ideas",
-        description:
-            "Build an AI-powered portfolio builder for developers with resume generation.",
-        date: "25 Jul 2026"
-    },
-    {
-        id: 2,
-        title: "React Revision",
-        description:
-            "Learn Context API, useReducer, memoization and React Router v7.",
-        date: "24 Jul 2026"
-    },
-    {
-        id: 3,
-        title: "Workout Plan",
-        description:
-            "Chest + Triceps on Monday. Cardio 20 mins after workout.",
-        date: "23 Jul 2026"
-    },
-    {
-        id: 4,
-        title: "Shopping",
-        description:
-            "Keyboard, Mouse Pad, SSD and Protein Oats.",
-        date: "22 Jul 2026"
-    },
-    {
-        id: 5,
-        title: "Project Ideas",
-        description:
-            "Expense Tracker, Habit Tracker, URL Shortener, Notes App.",
-        date: "20 Jul 2026"
-    },
-    {
-        id: 6,
-        title: "Meeting Notes",
-        description:
-            "Complete authentication and deploy backend before Sunday.",
-        date: "19 Jul 2026"
-    }
-];
 
-function NotesCard() {
+function NotesCard({handleDelete}) {
+    const notes = useNoteslist(state => state.notesList);
+    
     return (
         <>
             {notes.map(note => (
@@ -54,13 +13,33 @@ function NotesCard() {
 
                     <div className="note-card-top">
                         <h3>{note.title}</h3>
+
+                        <div className="note-action note-edit">
+                            <Pencil size={18} 
+                                // onClick={handleEdit}
+                            />
+                        </div>
                     </div>
 
                     <p>{note.description}</p>
 
                     <div className="note-card-footer">
-                        <CalendarDays size={15} />
-                        <span>{note.date}</span>
+
+                        <div className="note-card-date">
+                            <CalendarDays size={15} />
+                            <span>{note.date}</span>
+                        </div>
+
+                        <div className="note-card-actions">
+
+                            <div className="note-action note-delete">
+                                <Trash2 size={18} 
+                                    onClick={() => handleDelete(note.id)}
+                                />
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>

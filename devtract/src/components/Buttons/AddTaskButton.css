@@ -1,37 +1,42 @@
-.add-task-button{
+.add-task-button {
     display: flex;
-    justify-content: center;
     align-items: center;
-
+    justify-content: center;
     gap: 8px;
 
-    height: 50px;
-    min-width: 140px;
-
-    padding: 0px 20px;
+    padding: 0 22px;
+    height: 48px;
 
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
 
-    background-color: #7C3AED;
-    color: white;
+    background: linear-gradient(135deg, #7C3AED, #5B21B6);
+    color: #fff;
 
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+
+    box-shadow: 0 8px 18px rgba(124, 58, 237, 0.28);
 }
 
-.add-task-button:hover{
-    background-color: #6D28D9;
-
+.add-task-button:hover {
     transform: translateY(-2px);
-
-    box-shadow: 0px 5px 12px rgba(124, 58, 237, 0.25);
+    background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+    box-shadow: 0 12px 24px rgba(124, 58, 237, 0.38);
 }
 
-.add-task-button:active{
-    transform: translateY(0px);
+.add-task-button:active {
+transform: scale(0.96);
+}
+
+.add-task-button:focus {
+    outline: none;
+    box-shadow:
+        0 0 0 4px rgba(124, 58, 237, 0.2),
+        0 10px 20px rgba(124, 58, 237, 0.35);
 }
