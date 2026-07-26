@@ -24,8 +24,4 @@ dist-ssr
 *.sw?
 
 #Non working files
-src/pages/Dashboard.css
-src/pages/Dashboard.jsx
 src/pages/PasswordReset.jsx
-src/pages/Signup.css
-src/pages/Signup.jsx
