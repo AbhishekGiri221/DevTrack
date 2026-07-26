@@ -4,15 +4,16 @@ import { getToken } from "../../../utils/auth";
 import "./AddNotesForm.css";
 import useNotesList from '../../../store/notesStore';
 import axios from "axios";
-function AddNotesForm({ onClose }) {
+function AddNotesForm({ onClose, notes }) {
 
     const [noteData, setNoteData] = useState({
-        title: "",
-        description: "",
-        category: "Personal"
+        title: notes?.title || "",
+        description: notes?.description || "",
+        category: notes?.category || "Personal"
     });
 
     const addNotes = useNotesList(state => state.addNotes);
+    const updateNotes = useNotesList(state => state.updateNotes);
 
     function handleChange(e) {
         setNoteData(prev => ({
@@ -32,16 +33,32 @@ function AddNotesForm({ onClose }) {
             return;
         }
 
+        const token = getToken();
         try {
-            const token = getToken();
-            const response = await axios.post("http://localhost:3000/app/notes",noteData,{
-                    headers: {
-                        Authorization : `Bearer ${token}`
-                    }
-            });
+            if(notes){
+                const response = await axios.put(`http://localhost:3000/app/notes/${notes.id}`,noteData,{
+                        headers: {
+                            Authorization : `Bearer ${token}`
+                        }
+                });
 
-            addNotes(response.data);
-            alert("Notes added sucessfully");
+                updateNotes(response.data);
+                alert("Notes updated sucessfully");
+
+            }
+
+            else{
+
+                const response = await axios.post("http://localhost:3000/app/notes",noteData,{
+                        headers: {
+                            Authorization : `Bearer ${token}`
+                        }
+                });
+                addNotes(response.data);
+                
+                alert("Notes added sucessfully");
+            }
+            
         } catch (error) {
             console.log(error.message);
         }  
@@ -57,7 +74,9 @@ function AddNotesForm({ onClose }) {
                 <div className="note-header">
 
                     <div>
-                        <h2>Create Note</h2>
+                        {
+                            notes ? <h2>Update Note</h2> : <h2>Create Note</h2>
+                        }
                         <p>Capture your thoughts quickly.</p>
                     </div>
 
@@ -135,7 +154,9 @@ function AddNotesForm({ onClose }) {
                             type="submit"
                             className="save-btn"
                         >
-                            Save Note
+                            {
+                                notes ? `Update Note` : `Save Note`
+                            }
                         </button>
 
                     </div>

@@ -13,7 +13,12 @@ const useNotesList = create((set) => ({
         set((state) => (
             {notesList : notes}
         )
-    )
+    ),
+
+    updateNotes: (updatedNotes)=>
+                    set((state) => ({
+                        notesList: state.notesList.map((note)=> note.id !== updatedNotes.id ? note : updatedNotes)
+                    }))
 }));
 
 export default useNotesList;

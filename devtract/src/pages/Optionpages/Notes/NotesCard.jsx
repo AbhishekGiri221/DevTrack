@@ -3,9 +3,9 @@ import { CalendarDays, Pencil, Trash2 } from "lucide-react";
 import useNoteslist from "../../../store/notesStore";
 
 
-function NotesCard({handleDelete}) {
+function NotesCard({handleDelete, handleEdit}) {
     const notes = useNoteslist(state => state.notesList);
-    
+
     return (
         <>
             {notes.map(note => (
@@ -16,7 +16,7 @@ function NotesCard({handleDelete}) {
 
                         <div className="note-action note-edit">
                             <Pencil size={18} 
-                                // onClick={handleEdit}
+                                onClick={()=>handleEdit(note)}
                             />
                         </div>
                     </div>

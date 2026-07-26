@@ -54,7 +54,18 @@ function Notes() {
         }
     }
 
+    function handleEdit(note){
+        setShowNotesForm(true);
+        setSelectedNotes(note);
+    }
+
+    function handleAddNotes(){
+        setSelectedNotes(null);
+        setShowNotesForm(true);
+    }
+
     const [showNotesForm, setShowNotesForm] = useState(false);
+    const [selectedNotes, setSelectedNotes] = useState();
     return (
         <div className="notes-page">
 
@@ -68,19 +79,19 @@ function Notes() {
                 <div className="notes-actions">
                     <SearchBar placeholder="Search notes..." />
                     <AddNotesButton 
-                        onClick = {() => setShowNotesForm(true)}
+                        onClick = {handleAddNotes}
                     />
                 </div>
 
             </div>
 
             <div className="notes-grid">
-                <NotesCard handleDelete = {handleDelete}/>
+                <NotesCard handleDelete = {handleDelete} handleEdit = {handleEdit}/>
             </div>
 
             {
-                showNotesForm && <AddNotesForm onClose = {() => setShowNotesForm(false)
-                }/> 
+                showNotesForm && <AddNotesForm  onClose = {() => setShowNotesForm(false)} notes = {selectedNotes} 
+                                /> 
             }
         </div>
 
